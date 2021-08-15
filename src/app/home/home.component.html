@@ -1,0 +1,37 @@
+<div class="container-fluid">
+  <div class="row d-flex justify-content-start">
+      <div class="col-md-6">
+          <div class="row d-flex justify-content-center" *ngFor='let produto of listaUsuario' >
+              <div class="col-md-12 tabela">
+                <div class="img">
+                  <img src="{{ produto.img }}" alt="{{ produto.nome }}">
+                </div>
+                <div>
+                  <small>{{ produto.categoria.nome }}</small>
+                  <h5>{{ produto.nome }}</h5>
+                  <h6>{{ produto.kg }} g</h6>
+                </div>
+              </div>
+          </div>
+      </div>
+      <div class="col-md-6">
+        <div class="col-md-12 d-flex justify-content-start flex-wrap">
+          <div class="img">
+            <img src="{{ img }}" alt="{{ username }}">
+          </div>
+          <div class="dados-usuario">
+            <h2><strong>Nome:</strong> {{ nome }}</h2>
+            <h2><strong>Username:</strong> {{ username }}</h2>
+            <h2><strong>Idade:</strong> {{ idade }} anos</h2>
+            <h2><strong>Peso:</strong> {{ peso }} kg</h2>
+            <h2><strong>Altura:</strong> {{ altura }} cm</h2>
+          </div>
+        </div>
+        <div class="col-md-12 d-flex justify-content-start flex-column margem-imc">
+          <p><strong>IMC:</strong> {{ imcMemoria }}</p>
+          <p><strong>Classificação:</strong> {{ classificacao }}</p>
+          <p><strong>Nível Obesidade:</strong> {{ obesidade }}</p>
+        </div>
+      </div>
+  </div>
+</div>

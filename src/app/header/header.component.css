@@ -1,0 +1,251 @@
+.fs-16 {
+  font-size: 16pt;
+
+}
+
+a {
+  text-decoration: none;
+
+  cursor: pointer;
+
+}
+
+/* HEADER - PADDING */
+.paddingHeader {
+  padding: 5%;
+
+}
+
+/* HEADER - MENU - LOGO */
+header .logo {
+  margin-left: 10%;
+
+  width: 475px;
+  height: auto;
+
+  display: flex;
+  align-items: flex-start;
+  flex-direction: column;
+  justify-content: center;
+
+}
+
+header .logo a {
+  text-decoration: none;
+
+  color: var(--text-link);
+
+}
+
+header .logo p {
+  margin: 0;
+
+}
+
+header .margem {
+margin-right: 7%;
+
+}
+
+/* HEADER - MENU - SOCIAL MIDIAS */
+header .socialMedias {
+  width: 475px;
+  height: auto;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+}
+
+header .socialMedias .iconMedia {
+  padding: 2.5%;
+  margin: 0.5%;
+
+  width: 11%;
+  height: auto;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  background-color: var(--background-color-button);
+  border-radius: 3px 3px 3px 3px;
+
+  transition: background-color, .3s ease-in-out;
+
+}
+
+header .socialMedias .iconMedia .bi {
+  color: var(--text-white);
+
+}
+
+header .socialMedias .iconMedia:hover {
+  background-color: var(--background-color-button-hover);
+
+}
+
+header .socialMedias .iconPerfil {
+  margin-right: 4%;
+
+  width: 11%;
+  height: auto;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+}
+
+header .socialMedias .iconPerfil img {
+  width: 48px;
+  height: auto;
+
+  border-radius: 3px;
+
+}
+
+.texto {
+  font-family: 'Amaranth', sans-serif;
+
+}
+
+.habilitar-resposivo {
+  display: none;
+
+}
+
+.botao-postagem:hover:hover {
+  background-color: var(--button-ok) !important;
+
+  color: var(--text-link) !important;
+
+}
+
+/*.botoes {
+  display: flex;
+  justify-content: flex-start;
+
+}
+
+.botao {
+  margin: 1%;
+  padding: 0.5% 1%;
+
+  background-color: var(--background-color-button);
+
+  border: none;
+
+  border-radius: 5px;
+
+  color: var(--text-white);
+
+  font-weight: 500;
+
+  transition: background-color, .3s ease-in-out;
+
+}
+
+.botao:hover {
+  background-color: var(--background-color-button-hover);
+
+}
+
+.botao-outline {
+  margin: 1%;
+  padding: 0.5% 1%;
+
+  border: 1px solid var(--background-color-button);
+
+  text-decoration: none;
+
+  border-radius: 5px;
+
+  color: var(--text-link);
+
+  font-weight: 500;
+
+}
+
+.botao-outline:hover {
+  border: 1px solid var(--background-color-button-hover);
+
+}*/
+
+@media(max-width: 600px){
+  .redimensionamento {
+      justify-content: center !important;
+      flex-direction: column;
+
+      /*margin-left: 0%;*/
+      padding: 0 !important;
+  }
+
+  .redimensionamento img {
+      width: 25%;
+      height: auto;
+
+      transition: width, .5s ease;
+
+  }
+
+  .redimensionamento a p {
+      margin: 0 !important;
+
+  }
+
+  .botoes {
+      display: flex;
+      justify-content: center;
+
+  }
+
+  .botao, .botao-outline {
+      padding: 1% 1.5%;
+
+  }
+
+  header .logo {
+      margin-left: 0%;
+
+      width: 475px;
+      height: auto;
+
+      display: flex;
+      align-items: center;
+      flex-direction: column;
+      justify-content: center;
+
+  }
+
+  header .socialMedias .iconPerfil, .desabilitar {
+      display: none;
+
+  }
+
+  .habilitar-resposivo {
+      display: block;
+
+  }
+
+  .botao-postagem {
+      display: none !important;
+
+  }
+
+  /* HEADER - PADDING */
+  .paddingHeader {
+    padding: 5%;
+
+    display: flex !important;
+    justify-content: center !important;
+
+  }
+
+  header .margem {
+    margin-right: 0%;
+
+  }
+
+}

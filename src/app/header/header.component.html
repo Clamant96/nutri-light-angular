@@ -1,0 +1,52 @@
+<!-- HEADER / SOCIAL-->
+<header class="container-fluid d-flex flex-wrap justify-content-between paddingHeader">
+  <div class="logo">
+      <h1><a href="https://helpconnect.com.br/framework">Nutri Light</a></h1>
+      <p class=".fs-16 texto font-weight-bold desabilitar">Olá, {{nome}}</p>
+  </div>
+  <div class="socialMedias margem">
+    <a [routerLink]="['/user-edit', id]" class="iconPerfil">
+      <img src="{{foto}}" alt="Perfil: {{nome}}">
+    </a>
+    <!-- BOTAO PARA ADIOCIONAR UM NOVO PRODUTO -->
+    <a class="iconMedia botao-postagem"  data-toggle="modal" data-target="#novaPostagem" href="">
+      <i class="bi bi-plus-square"></i>
+    </a>
+    <a class="iconMedia" href="https://www.instagram.com/clmkevin/">
+        <i class="bi bi-instagram"></i>
+    </a>
+    <a class="iconMedia" href="https://www.linkedin.com/in/kevin-neri/">
+        <i class="bi bi-linkedin"></i>
+    </a>
+    <!--<a class="iconMedia" href="#">
+        <i class="bi bi-facebook"></i>
+    </a>-->
+    <a class="iconMedia" href="https://github.com/Clamant96">
+        <i class="bi bi-github"></i>
+    </a>
+    <a class="iconMedia" href="https://www.youtube.com/channel/UCUWHuhvyOzq75xYIoP0e-nw">
+      <i class="bi bi-youtube"></i>
+  </a>
+    <a (click)='logout()' class="iconMedia" href="#">
+        <i class="bi bi-box-arrow-right"></i>
+    </a>
+  </div>
+</header>
+
+<!-- SECTION / PERFIL -->
+<section class="container-fluid d-flex justify-content-start">
+    <div class="container d-flex justify-content-start align-items-center redimensionamento">
+        <!-- CRIA UMA INTERPOLACAO PARA TRAZER OS DADOS ARMAZEADOS DE ENVIROPMENT E APRESENTALAS AO USUARIO -->
+        <img [routerLink]="['/user-edit', id]" src="{{foto}}" alt="Imagem do usuario" width="60px" height="60px" class="img-fluid rounded-circle habilitar-resposivo">
+        <a href="#">
+            <!-- CRIA UMA INTERPOLACAO PARA TRAZER OS DADOS ARMAZEADOS DE ENVIROPMENT E APRESENTALAS AO USUARIO -->
+            <p class="ml-4 m-0 font-weight-bold .fs-16 texto habilitar-resposivo">Olá, {{nome}}</p>
+        </a>
+    </div>
+    <!--<div class="container texto">
+      <div class="botoes">
+          <button class="botao" data-toggle="modal" data-target="#novaPostagem">Nova Postagem</button>
+          <a class="botao-outline" href="#postagens">Ver Postagens</a>
+      </div>
+    </div>-->
+</section>

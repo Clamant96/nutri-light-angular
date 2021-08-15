@@ -1,0 +1,101 @@
+.tabela {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between flex-start;
+
+  margin-left: 50%;
+
+}
+
+.lista-usuario {
+  overflow-y: scroll;
+
+}
+
+.img {
+  width: 20%;
+  height: auto;
+
+  margin: 0% 2% 2% 2%;
+
+}
+
+.img img {
+  width: 100%;
+  height: auto;
+
+  border-radius: 5px;
+
+}
+
+h5 {
+  font-family: 'Amaranth', sans-serif;
+  font-weight: 700;
+
+  color: var(--text-default);
+
+}
+
+h6 {
+  font-family: 'Amaranth', sans-serif;
+  font-weight: 500;
+
+  color: var(--text-input);
+
+}
+
+small {
+  font-weight: 500;
+
+  color: var(--background-color-button);
+
+}
+
+.dados-usuario {
+  display: flex;
+  align-items: flex-start;
+  flex-direction: column;
+  justify-content: flex-start;
+
+}
+
+.dados-usuario h2 {
+  font-family: 'Titillium Web', sans-serif;
+  font-weight: 500;
+  font-size: 16px;
+
+  color: var(--text-default);
+
+}
+
+.dados-usuario h2 strong {
+  font-family: 'Amaranth', sans-serif;
+  font-weight: 700;
+  font-size: 16px;
+
+  color: var(--text-default);
+
+}
+
+.margem-imc {
+  padding-left: 2%;
+
+}
+
+.margem-imc p {
+  font-family: 'Titillium Web', sans-serif;
+  font-weight: 500;
+  font-size: 16px;
+
+  color: var(--text-default);
+
+}
+
+.margem-imc p strong {
+  font-family: 'Amaranth', sans-serif;
+  font-weight: 700;
+  font-size: 16px;
+
+  color: var(--text-default);
+
+}
