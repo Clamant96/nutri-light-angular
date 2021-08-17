@@ -1,3 +1,4 @@
+import { CategoriaService } from './../service/categoria.service';
 import { Router } from '@angular/router';
 import { ListaService } from './../service/lista.service';
 import { Produto } from './../model/Produto';
@@ -5,6 +6,7 @@ import { ProdutosService } from './../service/produtos.service';
 import { Component, OnInit } from '@angular/core';
 import { Lista } from '../model/Lista';
 import { environment } from 'src/environments/environment';
+import { Categoria } from '../model/Categoria';
 
 @Component({
   selector: 'app-home',
@@ -31,9 +33,16 @@ export class HomeComponent implements OnInit {
 
   listaUsuario: Produto[];
 
+  listaDeCategoria: Categoria[];
+
+  categoria: Categoria = new Categoria();
+
+  idCategoria: number;
+
   constructor(
     private produtosService: ProdutosService,
     private listaService: ListaService,
+    private categoriaService: CategoriaService,
     private router: Router
 
   ) { }
@@ -48,6 +57,7 @@ export class HomeComponent implements OnInit {
 
     this.findAllByProdutos();
     this.findByIdListaUsuario();
+    this.findAllByCategorias();
     this.geradorIMC();
 
   }
@@ -63,6 +73,27 @@ export class HomeComponent implements OnInit {
       }
 
     });
+  }
+
+  findAllByCategorias() {
+    this.categoriaService.findAllCategorias().subscribe((resp: Categoria[]) => {
+      this.listaDeCategoria = resp;
+
+    }, erro => {
+      if(erro.status == 500 || erro.status == 400) {
+        console.log('Ocorreu um erro ao trazer os dados!');
+
+      }
+
+    });
+  }
+
+  findByIdCategoria() {
+    this.categoriaService.findByIdCategoria(this.idCategoria).subscribe((resp: Categoria) => {
+      this.categoria = resp;
+
+    })
+
   }
 
   findByIdProduto(id: number) {
@@ -127,6 +158,71 @@ export class HomeComponent implements OnInit {
       this.obesidade = '0';
 
     }
+
+  }
+
+  /* INSERE OS DADOS NA BASE DE DEDOS */
+  publicar() {
+    this.categoria.id = this.idCategoria;
+    this.produto.categoria = this.categoria;
+
+    /* CHAMA O METODO DE PostagemService E REALIZA UM NOVO (POST), AGORA COM TODOS OS DADOS INSERIDOS */
+    this.produtosService.postProduto(this.produto).subscribe((resp: Produto) => {
+      this.produto = resp;
+
+      alert('Postagem realizada com sucesso!');
+
+      this.produto = new Produto();
+
+      this.findAllByProdutos();
+
+    })
+
+  }
+
+  publicarOver() {
+    window.document.querySelector('#publicacao')?.setAttribute('style', 'background-color: var(--button-ok) !important;');
+
+  }
+
+  publicarOut() {
+    window.document.querySelector('#publicacao')?.setAttribute('style', 'background-color: var(--background-color-button) !important;');
+
+  }
+
+  remover() {
+    if(window.document.URL != '/home') {
+      window.document.querySelector('.botao-postagem')?.setAttribute('style', 'display: none !important;');
+
+    }
+
+  }
+
+  adicionarProduto(idProduto: number, idListaUsuario: number) {
+    this.produtosService.adicionarProdutoAListaDoUsuario(idProduto, idListaUsuario).subscribe(() => {
+      this.findByIdListaUsuario();
+
+    }, erro => {
+      if(erro.status == 500 || erro.status == 400) {
+        alert('Ocorreu um erro ao adicionar o produto!');
+
+      }
+
+    });
+
+  }
+
+  removerProduto(idProduto: number, idListaUsuario: number) {
+    this.produtosService.removerProdutoAListaDoUsuario(idProduto, idListaUsuario).subscribe(() => {
+      this.findByIdListaUsuario();
+
+    }, erro => {
+      if(erro.status == 500 || erro.status == 400) {
+        alert('Ocorreu um erro ao remover o produto!');
+
+      }
+
+    });
 
   }
 

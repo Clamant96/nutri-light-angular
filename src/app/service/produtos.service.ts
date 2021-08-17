@@ -33,14 +33,24 @@ export class ProdutosService {
     return this.http.get<Produto>(`${this.url}/produtos/${id}`);
   }
 
-  adicionarProdutoAListaDoUsuario(idProduto: number, idPedido: number): Observable<Produto[]> {
+  postProduto(produto: Produto): Observable<Produto> {
 
-    return this.http.put<Produto[]>(`${this.url}/produtos/tabela_produtos/produtos/${idProduto}/pedidos/${idPedido}`, this.autorizacao);
+    return this.http.post<Produto>(`${this.url}/produtos`, produto, this.autorizacao);
   }
 
-  removerProdutoAListaDoUsuario(idProduto: number, idPedido: number): Observable<Produto[]> {
+  putProduto(produto: Produto): Observable<Produto> {
 
-    return this.http.put<Produto[]>(`${this.url}/produtos/deleta/tabela_produtos/produtos/${idProduto}/pedidos/${idPedido}`, this.autorizacao);
+    return this.http.put<Produto>(`${this.url}/produtos`, produto, this.autorizacao);
+  }
+
+  adicionarProdutoAListaDoUsuario(idProduto: number, idLista: number): Observable<Produto[]> {
+
+    return this.http.put<Produto[]>(`${this.url}/produtos/tabela_produtos/produtos/${idProduto}/lista/${idLista}`, this.autorizacao);
+  }
+
+  removerProdutoAListaDoUsuario(idProduto: number, idLista: number): Observable<Produto[]> {
+
+    return this.http.put<Produto[]>(`${this.url}/produtos/deleta/tabela_produtos/produtos/${idProduto}/lista/${idLista}`, this.autorizacao);
   }
 
 }

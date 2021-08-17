@@ -3,11 +3,11 @@
       <div class="col-md-6">
           <div class="row d-flex justify-content-center" *ngFor='let produto of listaUsuario' >
               <div class="col-md-12 tabela">
-                <div class="img">
+                <div class="img" (click)='removerProduto(produto.id, idListaUsuario)'>
                   <img src="{{ produto.img }}" alt="{{ produto.nome }}">
                 </div>
                 <div>
-                  <small>{{ produto.categoria.nome }}</small>
+                  <small class="nome-produto-listado">{{ produto.categoria.nome }}</small>
                   <h5>{{ produto.nome }}</h5>
                   <h6>{{ produto.kg }} g</h6>
                 </div>
@@ -31,6 +31,75 @@
           <p><strong>IMC:</strong> {{ imcMemoria }}</p>
           <p><strong>Classificação:</strong> {{ classificacao }}</p>
           <p><strong>Nível Obesidade:</strong> {{ obesidade }}</p>
+        </div>
+      </div>
+  </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="novoProduto" tabindex="-1" role="dialog" aria-labelledby="ModalNovoProduto" aria-hidden="true">
+  <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+      <div class="modal-content">
+      <div class="modal-header">
+          <h5 class="modal-title texto-bold" id="ModalNovoProduto">Nova Postagem</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+          <div class="form-group texto">
+              <label for="nome">Nome</label>
+              <input [(ngModel)]='produto.nome' type="text" class="form-control texto-input" id="nome" placeholder="Nome">
+          </div>
+          <div class="form-group texto">
+            <label for="kg">Kg</label>
+            <input [(ngModel)]='produto.nome' type="number" class="form-control texto-input" id="kg" placeholder="Kg">
+          </div>
+          <div class="form-group texto">
+              <label for="img">IMG</label>
+              <textarea [(ngModel)]='produto.img' name="texto" class="form-control texto-input" id="img" rows="3" placeholder="URL da imagem"></textarea>
+          </div>
+          <div class="form-group texto">
+              <!-- O ATRIBUTO data-dismiss="modal", FAZ COM QUE O ITEM INFORMADO SEJA FINALIZADO POR COMPLETO -->
+              <label class="texto-gray" for="texto">Escolha uma categoria ou <a class="texto-link" (click)='remover()' routerLink='/categoria' data-bs-dismiss="modal">cadastre um novo</a>: </label>
+              <!-- POR MEIO DA ESCOLHA DO USUARIO E PELO METODO (CHANGE) E CAPITURADO O ID DA OPCAO ESCOLHIDA PELO USUARIO -->
+              <select [(ngModel)]='idCategoria' class="form-control texto-input" name="tema" id="tema" (change)='findByIdCategoria()'>
+                  <!-- CRIA UM LOOP FOR PARA MOSTRAR TODAS AS OPCOES CONTIDAS DENTRO DA BADE DE DADOS DE TEMA -->
+                  <!-- TRAZ O VALOR DO ID DE CADA TEMA E DEIXA-O ARMAZENDO DENTRO DO VALUE="id" -->
+                  <option *ngFor='let categoria of listaDeCategoria' value="{{ categoria.id }}">{{ categoria.nome }}</option>
+              </select>
+          </div>
+      </div>
+      <div class="modal-footer">
+          <button type="button" class="botao texto" data-dismiss="modal">Cancelar</button>
+          <!-- CHAMA O METODO PUBLICAR() PARA REALIZAR A INSERCAO DOS DADOS NA BASE DE DADOS -->
+          <button type="button" class="botao texto" id="publicacao" (click)='publicar()' (mouseover)='publicarOver()' (mouseout)='publicarOut()' data-dismiss="modal">Publicar</button>
+      </div>
+      </div>
+  </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="listasProdutos" tabindex="-1" role="dialog" aria-labelledby="ModallistasProdutos" aria-hidden="true">
+  <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+            <h5 class="modal-title texto-bold" id="ModallistasProdutos">Lista de Produtos</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <div class="col-md-12">
+            <div class="row d-flex justify-content-center" *ngFor='let produto of listaDeProdutos' >
+                <a class="col-md-12 tabela-produtos" (click)='adicionarProduto(produto.id, idListaUsuario)' >
+                  <div class="img">
+                    <img src="{{ produto.img }}" alt="{{ produto.nome }}">
+                  </div>
+                  <div>
+                    <small>{{ produto.categoria.nome }}</small>
+                    <h5>{{ produto.nome }}</h5>
+                    <h6>{{ produto.kg }} g</h6>
+                  </div>
+                </a>
+            </div>
+          </div>
         </div>
       </div>
   </div>
