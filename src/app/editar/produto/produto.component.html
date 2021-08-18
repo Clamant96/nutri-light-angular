@@ -1,0 +1,56 @@
+<!-- NOVO TESTE -->
+<div class="container texto">
+  <div class="row d-flex align-items-start justify-content-center">
+      <div class="col-md-5 texto">
+          <a (click)='ajustar()' routerLink='/home' class="texto rota-link">
+              <i class="bi bi-chevron-double-left"></i> Home
+          </a>
+          / Produtos
+          <!--<h1 class="fs-54 texto texto-responsivo">Produtos</h1>-->
+
+          <div class="row mt-4 d-flex align-items-start justify-content-center">
+              <div class="col-md-12 img">
+                  <img src="{{ produto.img }}" alt="">
+              </div>
+          </div>
+      </div>
+
+      <!-- LISTA DE TEMAS -->
+      <div class="col-md-7 texto d-flex justify-content-center flex-column">
+        <div class="row mt-3 d-flex justify-content-center">
+            <div class="col-md-12">
+
+              <div class="form-group resposividade-botao">
+                <div class="form-group texto">
+                  <label for="nome">Nome</label>
+                  <input [(ngModel)]='produto.nome' type="text" class="form-control texto-input" id="nome" placeholder="Nome">
+                </div>
+                <div class="form-group texto">
+                    <label for="kg">Kg</label>
+                    <input [(ngModel)]='produto.kg' name="texto" class="form-control texto-input" id="kg" rows="3" placeholder="kg">
+                </div>
+                <div class="form-group texto">
+                  <label for="img">IMG</label>
+                  <input [(ngModel)]='produto.img' name="texto" class="form-control texto-input" id="img" rows="3" placeholder="IMG">
+                </div>
+                <div class="form-group texto">
+                    <!-- O ATRIBUTO data-dismiss="modal", FAZ COM QUE O ITEM INFORMADO SEJA FINALIZADO POR COMPLETO -->
+                    <label class="texto-gray" for="texto">Escolha uma categoria ou <a class="texto-link" routerLink='/categoria' data-dismiss="modal">cadastre uma nova</a>: </label>
+                    <!-- POR MEIO DA ESCOLHA DO USUARIO E PELO METODO (CHANGE) E CAPITURADO O ID DA OPCAO ESCOLHIDA PELO USUARIO -->
+                    <select [(ngModel)]='idCategoria' class="form-control texto-input" name="tema" id="tema" (change)='findByIdTema()'>
+                        <!-- CRIA UM LOOP FOR PARA MOSTRAR TODAS AS OPCOES CONTIDAS DENTRO DA BADE DE DADOS DE TEMA -->
+                        <!-- TRAZ O VALOR DO ID DE CADA TEMA E DEIXA-O ARMAZENDO DENTRO DO VALUE="id" -->
+                        <option *ngFor='let categorias of listaDeCategorias' value="{{categorias.id}}">{{categorias.nome}}</option>
+                    </select>
+                </div>
+                <div class="d-flex justify-content-end">
+                  <button class="botao margem-botao cancelar" routerLink='/home' >Cancelar</button>
+                  <button class="botao margem-botao" data-bs-toggle="modal" data-bs-target="#editarCategoria" (click)='atualizar()' >Editar</button>
+                </div>
+              </div>
+
+            </div>
+        </div>
+      </div>
+  </div>
+</div>

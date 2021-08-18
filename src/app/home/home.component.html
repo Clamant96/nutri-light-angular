@@ -55,7 +55,7 @@
           </div>
           <div class="form-group texto">
               <label for="img">IMG</label>
-              <textarea [(ngModel)]='produto.img' name="texto" class="form-control texto-input" id="img" rows="3" placeholder="URL da imagem"></textarea>
+              <input [(ngModel)]='produto.img' name="texto" class="form-control texto-input" id="img" rows="3" placeholder="URL da imagem">
           </div>
           <div class="form-group texto">
               <!-- O ATRIBUTO data-dismiss="modal", FAZ COM QUE O ITEM INFORMADO SEJA FINALIZADO POR COMPLETO -->
@@ -88,7 +88,8 @@
         <div class="modal-body">
           <div class="col-md-12">
             <div class="row d-flex justify-content-center" *ngFor='let produto of listaDeProdutos' >
-                <a class="col-md-12 tabela-produtos" (click)='adicionarProduto(produto.id, idListaUsuario)' >
+              <a class="col-md-12 tabela-produtos" (click)='adicionarProduto(produto.id, idListaUsuario)' >
+                <div class="col-md-10 tabela-produtos">
                   <div class="img">
                     <img src="{{ produto.img }}" alt="{{ produto.nome }}">
                   </div>
@@ -97,7 +98,11 @@
                     <h5>{{ produto.nome }}</h5>
                     <h6>{{ produto.kg }} g</h6>
                   </div>
+                </div>
+                <a class="botao" data-bs-dismiss="modal" aria-label="Close" [routerLink]="['/produto-edit', produto.id]">
+                  Editar
                 </a>
+              </a>
             </div>
           </div>
         </div>
