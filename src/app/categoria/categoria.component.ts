@@ -2,7 +2,7 @@ import { CategoriaService } from './../service/categoria.service';
 import { Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import { Categoria } from '../model/Categoria';
-import { environment } from 'src/environments/environment';
+import { environment } from 'src/environments/environment.prod';
 
 @Component({
   selector: 'app-categoria',

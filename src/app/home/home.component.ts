@@ -5,7 +5,7 @@ import { Produto } from './../model/Produto';
 import { ProdutosService } from './../service/produtos.service';
 import { Component, OnInit } from '@angular/core';
 import { Lista } from '../model/Lista';
-import { environment } from 'src/environments/environment';
+import { environment } from 'src/environments/environment.prod';
 import { Categoria } from '../model/Categoria';
 
 @Component({
@@ -176,7 +176,12 @@ export class HomeComponent implements OnInit {
 
       this.findAllByProdutos();
 
-    })
+    }, erro => {
+      if(erro.status == 500 || erro.status == 400) {
+        alert('O correu um erro ao cadastrar o produto');
+      }
+
+    });
 
   }
 
@@ -202,6 +207,8 @@ export class HomeComponent implements OnInit {
     this.produtosService.adicionarProdutoAListaDoUsuario(idProduto, idListaUsuario).subscribe(() => {
       this.findByIdListaUsuario();
 
+      alert('Produto adicionado com sucesso de sua lista!');
+
     }, erro => {
       if(erro.status == 500 || erro.status == 400) {
         alert('Ocorreu um erro ao adicionar o produto!');
@@ -216,9 +223,33 @@ export class HomeComponent implements OnInit {
     this.produtosService.removerProdutoAListaDoUsuario(idProduto, idListaUsuario).subscribe(() => {
       this.findByIdListaUsuario();
 
+      alert('Produto removido com sucesso de sua lista!');
+
     }, erro => {
       if(erro.status == 500 || erro.status == 400) {
         alert('Ocorreu um erro ao remover o produto!');
+
+      }
+
+    });
+
+  }
+
+  /* ATUALIZA UMA POSTAGEM NA BASE DE DADOS */
+  atualizar() {
+    this.categoria.id = this.idCategoria;
+    this.produto.categoria = this.categoria;
+
+    this.produtosService.putProduto(this.produto).subscribe((resp: Produto) => {
+      this.produto = resp;
+
+      alert('Postagem atualizada com sucesso!');
+
+      this.findByIdListaUsuario();
+
+    }, erro => {
+      if(erro.status == 500 || erro.status == 400) {
+        alert('Ocorreu um erro ao atualizar o produto!');
 
       }
 

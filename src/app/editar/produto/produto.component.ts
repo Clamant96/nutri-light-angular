@@ -4,7 +4,7 @@ import { Component, OnInit } from '@angular/core';
 import { Produto } from 'src/app/model/Produto';
 import { ProdutosService } from 'src/app/service/produtos.service';
 import { CategoriaService } from 'src/app/service/categoria.service';
-import { environment } from 'src/environments/environment';
+import { environment } from 'src/environments/environment.prod';
 
 @Component({
   selector: 'app-produto',

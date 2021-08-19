@@ -2,7 +2,7 @@ import { Router } from '@angular/router';
 import { AuthService } from './../service/auth.service';
 import { Component, OnInit } from '@angular/core';
 import { UserLogin } from '../model/UserLogin';
-import { environment } from 'src/environments/environment';
+import { environment } from 'src/environments/environment.prod';
 
 @Component({
   selector: 'app-login',
