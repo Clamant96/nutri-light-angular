@@ -1,3 +1,7 @@
+import { MensagemService } from './../service/mensagem.service';
+import { Mensagem } from './../model/Mensagem';
+import { AuthService } from './../service/auth.service';
+import { Usuario } from './../model/Usuario';
 import { CategoriaService } from './../service/categoria.service';
 import { Router } from '@angular/router';
 import { ListaService } from './../service/lista.service';
@@ -33,16 +37,34 @@ export class HomeComponent implements OnInit {
 
   listaUsuario: Produto[];
 
+  listaRecuperadaDaCategoria: Produto[];
+
   listaDeCategoria: Categoria[];
 
   categoria: Categoria = new Categoria();
 
+  produtosDaCategoria: Categoria;
+  categorias: Categoria[];
+
   idCategoria: number;
+
+  usuario: Usuario = new Usuario();
+  idUsuario: number;
+  idUser = environment.id;
+
+  mensagem: Mensagem = new Mensagem();
+  minhasPostagens: Produto = new Produto();
+
+  produtoModalDados: Produto = new Produto();
+  usernameUsuarioModal: string;
+  fotoUsuarioModal: string;
 
   constructor(
     private produtosService: ProdutosService,
     private listaService: ListaService,
     private categoriaService: CategoriaService,
+    private authService: AuthService,
+    private mensagemService: MensagemService,
     private router: Router
 
   ) { }
@@ -56,9 +78,10 @@ export class HomeComponent implements OnInit {
     }
 
     this.findAllByProdutos();
-    this.findByIdListaUsuario();
+    //this.findByIdListaUsuario();
     this.findAllByCategorias();
     this.geradorIMC();
+    this.findAllByCategoria();
 
   }
 
@@ -109,6 +132,66 @@ export class HomeComponent implements OnInit {
     });
   }
 
+  findByIdProdutoModal(id: number) {
+    this.produtosService.getAllByIdProduto(id).subscribe((resp: Produto) => {
+      this.produtoModalDados = resp;
+
+      this.usernameUsuarioModal = this.produtoModalDados.usuario.username;
+      this.fotoUsuarioModal = this.produtoModalDados.usuario.foto;
+
+    }, erro => {
+      if(erro.status == 500 || erro.status == 400) {
+        console.log('Ocorreu um erro ao trazer os dados!');
+
+      }
+
+    });
+  }
+
+  findAllByCategoria() {
+    this.categoriaService.findAllCategorias().subscribe((resp: Categoria[]) => {
+      this.categorias = resp;
+
+      console.log("QTD categorias: "+ this.categorias.length);
+
+      // TRAZ OS DADOS DE CADA CATEGORIA PARA POPULAR A TABELA DO USUARIO
+      for(let i = 0; i < this.categorias.length; i++) {
+        /* PESQUISA POR CATEGORIA */
+        this.findByCategoria( i + 1 );
+
+      }
+
+    }, erro => {
+      if(erro.status == 500 || erro.status == 400) {
+        console.log('Ocorreu um erro ao trazer os dados!');
+
+      }
+
+    });
+
+  }
+
+  findByCategoria(idCategoria: number) {
+    this.categoriaService.findByIdCategoria(idCategoria).subscribe((resp: Categoria) => {
+      this.produtosDaCategoria = resp;
+
+      /* ATRIBUE OS PRODUTOS DAQUELA DETERMINADA CADEGORIA AO ARRAY DE PRODUTOS TEMPORARIO */
+      this.listaRecuperadaDaCategoria = this.produtosDaCategoria.produtos;
+
+      console.log(this.listaRecuperadaDaCategoria);
+
+      this.gerarLista(this.produtosDaCategoria, this.listaRecuperadaDaCategoria, environment.id);
+
+    }, erro => {
+      if(erro.status == 500 || erro.status == 400) {
+        console.log('Ocorreu um erro ao trazer os dados!');
+
+      }
+
+    });
+
+  }
+
   findByIdListaUsuario() {
     this.listaService.findByIdListaUsuario(this.idListaUsuario).subscribe((resp: Produto[]) => {
       this.listaUsuario = resp;
@@ -120,6 +203,22 @@ export class HomeComponent implements OnInit {
         console.log('Ocorreu um erro ao trazer os dados!');
 
       }
+
+    });
+
+  }
+
+  findByIdUsuario(id: number) {
+    this.authService.getByIdUsuario(id).subscribe((resp: Usuario) => {
+      this.usuario = resp;
+
+    });
+
+  }
+
+  likeProduto(idUsuario: number, idProduto: number) {
+    this.authService.likeProduto(idUsuario, idProduto).subscribe(() => {
+      this.findAllByProdutos();
 
     });
 
@@ -166,6 +265,17 @@ export class HomeComponent implements OnInit {
     this.categoria.id = this.idCategoria;
     this.produto.categoria = this.categoria;
 
+    this.idUsuario = environment.id;
+    this.usuario.id = this.idUsuario;
+
+    console.log("Usuario: ");
+    console.log(this.usuario);
+
+    console.log("Usuario enviropment: ");
+    console.log(environment.id);
+
+    this.produto.usuario = this.usuario;
+
     /* CHAMA O METODO DE PostagemService E REALIZA UM NOVO (POST), AGORA COM TODOS OS DADOS INSERIDOS */
     this.produtosService.postProduto(this.produto).subscribe((resp: Produto) => {
       this.produto = resp;
@@ -179,6 +289,31 @@ export class HomeComponent implements OnInit {
     }, erro => {
       if(erro.status == 500 || erro.status == 400) {
         alert('O correu um erro ao cadastrar o produto');
+      }
+
+    });
+
+  }
+
+  postMensagemProduto(idPostagem: number) {
+    this.mensagem.username = environment.username;
+
+    /* ACESSA O OBJETO TEMA(ID), E DENTRO DELE INSERE O DADO VINDO DA OPCAO ESCOLHIDA PELO USUARIO */
+    this.minhasPostagens.id = idPostagem;
+    /* INSERE O ID DE TEMA DENTRO DE POSTAGEM(TEMA) */
+    this.mensagem.produto = this.minhasPostagens;
+
+    this.mensagemService.postMensagem(this.mensagem).subscribe((resp: Mensagem) => {
+      this.mensagem = resp;
+
+      this.findAllByProdutos();
+
+      this.mensagem = new Mensagem();
+
+    }, erro => {
+      if(erro.status == 500) {
+        alert('O correu um erro ao tentar realizar o comentarios!');
+
       }
 
     });
@@ -254,6 +389,77 @@ export class HomeComponent implements OnInit {
       }
 
     });
+
+  }
+
+  /* GERA A LISTA DO USUARIO */
+  gerarLista(categoria: Categoria, listaProdutos: Produto[], idListaUsuario: number) {
+
+    console.log("Qtd categorias: "+ this.listaDeCategoria.length);
+
+    let contador = 0;
+    let maximo = 0;
+
+    if(categoria.id == 1) {
+      maximo = 1;
+
+    }else if(categoria.id == 2) {
+      maximo = 2;
+
+    }else if(categoria.id == 3) {
+      maximo = 4;
+
+    }else if(categoria.id == 4) {
+      maximo = 2;
+
+    }
+
+    /* POR MEIO DO ARRAY RECEBIDO, NAVEGA ITEM A ITEM PARA INSERIR POR CATEGORIA NA LISTA DO USUARIO */
+    for(let i = 0; i < listaProdutos.length; i++) {
+
+      /* VERIFICA A LISTA DO USUARIO PARA GARANTIR QUE AS REGRAS SEJAM RESPEITADAS */
+      this.listaService.findByIdListaUsuario(this.idListaUsuario).subscribe((resp: Produto[]) => {
+        this.listaUsuario = resp;
+
+        console.log(this.listaUsuario);
+
+        for(let j = 0; j < this.listaUsuario.length; j++) {
+          if(this.listaUsuario[j].categoria.id == categoria.id) {
+            console.log('Categoria '+ categoria.id +' localizado!!');
+            contador++;
+          }
+
+        }
+
+        console.log('Contador: ');
+        console.log(contador);
+
+      }, erro => {
+        if(erro.status == 500 || erro.status == 400) {
+          console.log('Ocorreu um erro ao trazer os dados!');
+
+        }
+
+      });
+
+      if(contador <= 1) {
+        console.log("QTD: ");
+        console.log(contador);
+        this.produtosService.adicionarProdutoAListaDoUsuario(listaProdutos[i].id, idListaUsuario).subscribe(() => {
+          console.log(`Item ${listaProdutos[i].id} inserido em sua lista com sucesso`);
+
+        },erro => {
+          if(erro.status == 500 || erro.status == 400) {
+            alert('Ocorreu um erro ao tentar gera sua lista!');
+          }
+
+        });
+
+      }
+
+    }
+
+    this.findByIdListaUsuario();
 
   }
 

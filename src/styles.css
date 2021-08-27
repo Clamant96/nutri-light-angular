@@ -107,7 +107,28 @@ hr {
     --background-color-copyright: #191919;
     --background-color-danger: #d60f0f;
     --background-color-danger-hover: #a01f1f;
+    --background-color-header: #ffffff;
+    --background-section: #ffffff;
 
     --button-ok: #b4b4b4;
+
+    --background-page: #fafafa;
+    --background-login: #ffffff;
+    --background-header: #ffffff;
+    --background-section: #ffffff;
+
+    --color-text-black: #262626;
+    --color-text-white: #ffffff;
+    --color-text-gray: #8e8e8e;
+    --color-text-gray-ligth: #dbdbdb;
+    --color-text-blue-text-link-1: #00376b;
+    --color-text-blue-text-link-2: #0095f6;
+
+    --border-gray: #dbdbdb;
+    --border-gray-ligth: #e6e6e6;
+
+    --background-button-blue: #0095f6;
+
+    --box-shadow: #262626;
 
 }

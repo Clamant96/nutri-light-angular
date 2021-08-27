@@ -1,7 +1,9 @@
 export const environment = {
   production: true,
   server: 'http://localhost:',
+  //server: 'https://nutri-light.',
   porta: '8080',
+  //porta: 'herokuapp.com',
   id: 0,
 	nome: '',
 	idade: 0,

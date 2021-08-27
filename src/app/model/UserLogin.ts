@@ -1,3 +1,4 @@
+import { Produto } from './Produto';
 import { Lista } from "./Lista";
 
 export class UserLogin {
@@ -12,4 +13,5 @@ export class UserLogin {
 	public token: string;
 	public foto: string;
 	public imc: number;
+  public produtos: Produto[];
 }
