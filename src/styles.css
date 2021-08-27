@@ -22,6 +22,8 @@ html, body {
 
     font-family: 'Titillium Web', sans-serif;
 
+    background-color: var(--background-page) !important;
+
 }
 
 ::-webkit-scrollbar {
@@ -86,7 +88,14 @@ hr {
     border-top: 0px solid var(--border-style-search);
     border-left: 0px solid var(--border-style-search);
     border-right: 0px solid var(--border-style-search);
-    border-bottom: 1px solid var(--border-style-search);
+    border-bottom: 1px solid var(--text-input) !important;
+
+}
+
+.centralizar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
 
 }
 
