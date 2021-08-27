@@ -81,10 +81,11 @@ export class HomeComponent implements OnInit {
     //this.findByIdListaUsuario();
     this.findAllByCategorias();
     this.geradorIMC();
-    this.findAllByCategoria();
+    this.findAllByCategoria(this.idListaUsuario);
 
   }
 
+  /* TRAZ A LISTA DE TODOS OS PRODUTOS CADASTRADOS NO SISTEMA */
   findAllByProdutos() {
     this.produtosService.getAllProdutos().subscribe((resp: Produto[]) => {
       this.listaDeProdutos = resp;
@@ -98,6 +99,7 @@ export class HomeComponent implements OnInit {
     });
   }
 
+  /* TRAZ A LISTA DE TODAS AS CATEGORIAS CADASTRADAS NO SISTEMA */
   findAllByCategorias() {
     this.categoriaService.findAllCategorias().subscribe((resp: Categoria[]) => {
       this.listaDeCategoria = resp;
@@ -111,6 +113,7 @@ export class HomeComponent implements OnInit {
     });
   }
 
+  /* TRAZ OS DADOS DE UMA CATEGORIA ESPECIFICA */
   findByIdCategoria() {
     this.categoriaService.findByIdCategoria(this.idCategoria).subscribe((resp: Categoria) => {
       this.categoria = resp;
@@ -119,6 +122,7 @@ export class HomeComponent implements OnInit {
 
   }
 
+  /* TRAZ OS DADOS DE UM PRODUTO ESPECIFICO */
   findByIdProduto(id: number) {
     this.produtosService.getAllByIdProduto(id).subscribe((resp: Produto) => {
       this.produto = resp;
@@ -132,6 +136,7 @@ export class HomeComponent implements OnInit {
     });
   }
 
+  /* TRAZ OS DADOS DE UM PRODUTO ESPECIFICO PARA SER APRESENTADO EM UM MODAL */
   findByIdProdutoModal(id: number) {
     this.produtosService.getAllByIdProduto(id).subscribe((resp: Produto) => {
       this.produtoModalDados = resp;
@@ -148,7 +153,8 @@ export class HomeComponent implements OnInit {
     });
   }
 
-  findAllByCategoria() {
+  /* TRAZ UMA LISTA COM TODAS AS CATEGORIAS E CHAMA O METODO DE CATEGORIA POR ID, PARA FILTRAR OS PRODUTOS POR CATEGORIA */
+  findAllByCategoria(idListaUsuario: number) {
     this.categoriaService.findAllCategorias().subscribe((resp: Categoria[]) => {
       this.categorias = resp;
 
@@ -157,7 +163,7 @@ export class HomeComponent implements OnInit {
       // TRAZ OS DADOS DE CADA CATEGORIA PARA POPULAR A TABELA DO USUARIO
       for(let i = 0; i < this.categorias.length; i++) {
         /* PESQUISA POR CATEGORIA */
-        this.findByCategoria( i + 1 );
+        this.findByCategoria( i + 1, idListaUsuario );
 
       }
 
@@ -171,16 +177,69 @@ export class HomeComponent implements OnInit {
 
   }
 
-  findByCategoria(idCategoria: number) {
+  /* TRAZ OS DADOS DE UMA CATEGORIA ESPECIFICA */
+  findByCategoria(idCategoria: number, idListaUsuario: number) {
     this.categoriaService.findByIdCategoria(idCategoria).subscribe((resp: Categoria) => {
       this.produtosDaCategoria = resp;
 
       /* ATRIBUE OS PRODUTOS DAQUELA DETERMINADA CADEGORIA AO ARRAY DE PRODUTOS TEMPORARIO */
       this.listaRecuperadaDaCategoria = this.produtosDaCategoria.produtos;
 
-      console.log(this.listaRecuperadaDaCategoria);
+      //console.log('DADOS OBTIDOS DA REQUEST DE CATEGORIA: '+ this.produtosDaCategoria.nome);
+      //console.log(this.listaRecuperadaDaCategoria);
 
-      this.gerarLista(this.produtosDaCategoria, this.listaRecuperadaDaCategoria, environment.id);
+      /* =================================================================== */
+      /* == RECURSAO PARA DEFINIR OS PRODUTOS MAIS UTILIZADOS NO SISTEMA === */
+      /* =================================================================== */
+      for(let i = 0; i < this.listaRecuperadaDaCategoria.length; i++) {
+        this.listaRecuperadaDaCategoria[i].listas.sort((a, b) => {
+          if(a > b) {
+            return -1;
+          }
+          if(a < b) {
+            return 1;
+          }
+          return 0;
+        });
+
+      }
+
+      //console.log('Resultado do filtro: ');
+      //console.log(this.listaRecuperadaDaCategoria);
+
+      /* VARIAVEL PARA ARMAZENAR E ENVIAR OS DADOS FILTRADO PARA A LISTA DO USUARIO LOGADO NO SISTEMA */
+      let memoria = [];
+
+      /* PARA CADA CATEGORIA SE TEM UMA QTD MAXIMA DE PRODUTOS PERMITIDOS */
+      for(let i = 0; i < this.listaRecuperadaDaCategoria.length; i++) {
+        // 2 -> proteínas
+        if(this.produtosDaCategoria.id == 1 && memoria.length < 2) {
+          memoria.push(this.listaRecuperadaDaCategoria[i]);
+
+        // 3 -> carboidratos
+        }else if(this.produtosDaCategoria.id == 2 && memoria.length < 3) {
+          memoria.push(this.listaRecuperadaDaCategoria[i]);
+
+        // 5 -> verduras
+        }else if(this.produtosDaCategoria.id == 3 && memoria.length < 5) {
+          memoria.push(this.listaRecuperadaDaCategoria[i]);
+
+        // 3 -> frutas
+        }else if(this.produtosDaCategoria.id == 4 && memoria.length < 3) {
+          memoria.push(this.listaRecuperadaDaCategoria[i]);
+
+        }
+
+      }
+
+      console.log('Tratamento de memoria para envio ao banco: ');
+      console.log(memoria);
+
+      /* INSERE OS DADOS OBTIDOS NA LISTA DO USUARIO */
+      //this.gerarLista(this.produtosDaCategoria, this.listaRecuperadaDaCategoria, environment.id);
+      this.gerarLista(memoria, idListaUsuario);
+
+      memoria = [];
 
     }, erro => {
       if(erro.status == 500 || erro.status == 400) {
@@ -192,6 +251,7 @@ export class HomeComponent implements OnInit {
 
   }
 
+  /* TRAZ A LISTA DE PRODUTOS CADASTRADOS NA LISTA DO USUARIO LOGADO */
   findByIdListaUsuario() {
     this.listaService.findByIdListaUsuario(this.idListaUsuario).subscribe((resp: Produto[]) => {
       this.listaUsuario = resp;
@@ -208,6 +268,7 @@ export class HomeComponent implements OnInit {
 
   }
 
+  /* TRAZ OS DADOS DO USUARIO LOGADO NO SISTEMA */
   findByIdUsuario(id: number) {
     this.authService.getByIdUsuario(id).subscribe((resp: Usuario) => {
       this.usuario = resp;
@@ -216,6 +277,7 @@ export class HomeComponent implements OnInit {
 
   }
 
+  /* DEIXA UM LIKE OU REMOTE UM LIKE DE UM DETERMINADO PRODUTO */
   likeProduto(idUsuario: number, idProduto: number) {
     this.authService.likeProduto(idUsuario, idProduto).subscribe(() => {
       this.findAllByProdutos();
@@ -224,6 +286,7 @@ export class HomeComponent implements OnInit {
 
   }
 
+  /* GERA O IMC DO USUARIO QUE SE LOGA NO SISTEMA */
   geradorIMC() {
     /*
       IMC	CLASSIFICAÇÃO	OBESIDADE (GRAU)
@@ -295,6 +358,7 @@ export class HomeComponent implements OnInit {
 
   }
 
+  /* REALIZA UMA NOVA MENSAGEM EM UMA PRODUTO ESPECIFICO */
   postMensagemProduto(idPostagem: number) {
     this.mensagem.username = environment.username;
 
@@ -338,6 +402,7 @@ export class HomeComponent implements OnInit {
 
   }
 
+  /* ADICIONA UM PRODUTO ESPECIFICO A LISTA DO USUARIO LOGADO */
   adicionarProduto(idProduto: number, idListaUsuario: number) {
     this.produtosService.adicionarProdutoAListaDoUsuario(idProduto, idListaUsuario).subscribe(() => {
       this.findByIdListaUsuario();
@@ -354,6 +419,7 @@ export class HomeComponent implements OnInit {
 
   }
 
+  /* REMOVE UM PRODUTO ESPECIFICO A LISTA DO USUARIO LOGADO */
   removerProduto(idProduto: number, idListaUsuario: number) {
     this.produtosService.removerProdutoAListaDoUsuario(idProduto, idListaUsuario).subscribe(() => {
       this.findByIdListaUsuario();
@@ -393,9 +459,9 @@ export class HomeComponent implements OnInit {
   }
 
   /* GERA A LISTA DO USUARIO */
-  gerarLista(categoria: Categoria, listaProdutos: Produto[], idListaUsuario: number) {
+  gerarLista(produtosSelecionados: Produto[], idListaUsuario: number/*categoria: Categoria, listaProdutos: Produto[], idListaUsuario: number*/) {
 
-    console.log("Qtd categorias: "+ this.listaDeCategoria.length);
+    /*console.log("Qtd categorias: "+ this.listaDeCategoria.length);
 
     let contador = 0;
     let maximo = 0;
@@ -414,10 +480,10 @@ export class HomeComponent implements OnInit {
 
     }
 
-    /* POR MEIO DO ARRAY RECEBIDO, NAVEGA ITEM A ITEM PARA INSERIR POR CATEGORIA NA LISTA DO USUARIO */
+    // POR MEIO DO ARRAY RECEBIDO, NAVEGA ITEM A ITEM PARA INSERIR POR CATEGORIA NA LISTA DO USUARIO
     for(let i = 0; i < listaProdutos.length; i++) {
 
-      /* VERIFICA A LISTA DO USUARIO PARA GARANTIR QUE AS REGRAS SEJAM RESPEITADAS */
+      // VERIFICA A LISTA DO USUARIO PARA GARANTIR QUE AS REGRAS SEJAM RESPEITADAS
       this.listaService.findByIdListaUsuario(this.idListaUsuario).subscribe((resp: Produto[]) => {
         this.listaUsuario = resp;
 
@@ -456,6 +522,20 @@ export class HomeComponent implements OnInit {
         });
 
       }
+
+    }*/
+
+    /* NAVEGA DENTRO DA LISTA DE MEMORIA FILTRADO, PASSANDO COMO PARAMETRO O ID DO PRODUTO E O ID DA LISTA DO USUARIO, QUE E O MESMO ID DO USUARIO CADASTRADO NO SISTEMA */
+    for(let i = 0; i < produtosSelecionados.length; i++) {
+      this.produtosService.adicionarProdutoAListaDoUsuario(produtosSelecionados[i].id, idListaUsuario).subscribe(() => {
+        console.log(`Item ${produtosSelecionados[i].nome} inserido em sua lista com sucesso`);
+
+      },erro => {
+        if(erro.status == 500 || erro.status == 400) {
+          alert('Ocorreu um erro ao tentar gera sua lista!');
+        }
+
+      });
 
     }
 
