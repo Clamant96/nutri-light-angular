@@ -629,7 +629,7 @@ section .feed-noticias .feed .postagem-usuario .modal .modal-dialog .vizualizar-
   height: auto;
 
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   justify-content: center;
 
   background-color: var(--background-section);
@@ -650,7 +650,7 @@ section .feed-noticias .feed .postagem-usuario .modal .modal-dialog .vizualizar-
 
 section .feed-noticias .feed .postagem-usuario .modal .modal-dialog .vizualizar-postagem .dados-postagem {
   width: 40%;
-  height: 600px;
+  height: auto;
 
   display: flex;
   align-items: center;

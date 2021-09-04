@@ -1,14 +1,17 @@
 <!-- HEADER / SOCIAL-->
 <header class="container-fluid d-flex flex-wrap justify-content-between paddingHeader">
   <div class="logo">
-      <h1><a href="https://helpconnect.com.br/framework">Nutri Light</a></h1>
+      <h1><a routerLink='/home'>Nutri Light</a></h1>
       <p class=".fs-16 texto font-weight-bold desabilitar">Olá, {{nome}}</p>
   </div>
   <div class="socialMedias margem">
-    <a [routerLink]="['/user-edit', id]" class="iconPerfil">
+    <a [routerLink]="['/perfil', id]" class="iconPerfil">
       <img src="{{foto}}" alt="Perfil: {{nome}}">
     </a>
     <!-- BOTAO PARA ADIOCIONAR UM NOVO PRODUTO -->
+    <a class="iconMedia" routerLink='/home' >
+      <i class="bi bi-house-door"></i>
+    </a>
     <a class="iconMedia botao-postagem" data-bs-toggle="modal" data-bs-target="#novoProduto" href="">
       <i class="bi bi-plus-square"></i>
     </a>
@@ -21,12 +24,12 @@
     <!--<a class="iconMedia" href="#">
         <i class="bi bi-facebook"></i>
     </a>-->
-    <a class="iconMedia" href="">
+    <!--<a class="iconMedia" href="">
         <i class="bi bi-github"></i>
-    </a>
+    </a>-->
     <a class="iconMedia" href="">
       <i class="bi bi-youtube"></i>
-  </a>
+    </a>
     <a (click)='logout()' class="iconMedia" href="">
         <i class="bi bi-box-arrow-right"></i>
     </a>

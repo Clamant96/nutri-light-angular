@@ -30,7 +30,12 @@ export class ProdutosService {
 
   getAllByIdProduto(id: number): Observable<Produto> {
 
-    return this.http.get<Produto>(`${this.url}/produtos/${id}`);
+    return this.http.get<Produto>(`${this.url}/produtos/${id}`, this.autorizacao);
+  }
+
+  getAllByUsuarioProduto(id: number) {
+
+    return this.http.get<Produto[]>(`${this.url}/produtos/produtosUsuario/${id}`, this.autorizacao);
   }
 
   postProduto(produto: Produto): Observable<Produto> {

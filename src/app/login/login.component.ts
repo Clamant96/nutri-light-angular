@@ -50,7 +50,7 @@ export class LoginComponent implements OnInit {
       environment.altura = this.login.altura;
       environment.token = this.login.token;
       environment.foto = this.login.foto;
-      environment.imc = this.login.imc;
+      environment.imc = this.login.peso / ( this.login.altura * this.login.altura );
       environment.lista = this.login.lista.id;
 
       console.log(environment.id);

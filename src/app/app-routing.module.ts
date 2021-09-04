@@ -1,3 +1,4 @@
+import { PerfilComponent } from './perfil/perfil.component';
 import { ProdutoComponent } from './editar/produto/produto.component';
 import { CategoriaComponent } from './categoria/categoria.component';
 import { NgModule } from '@angular/core';
@@ -12,7 +13,8 @@ const routes: Routes = [
   { path: 'cadastro', component: CadastroComponent },
   { path: 'home', component: HomeComponent },
   { path: 'categoria', component: CategoriaComponent },
-  { path: 'produto-edit/:id', component: ProdutoComponent }
+  { path: 'produto-edit/:id', component: ProdutoComponent },
+  { path: 'perfil/:id', component: PerfilComponent }
 ];
 
 @NgModule({
