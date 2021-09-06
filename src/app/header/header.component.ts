@@ -12,6 +12,7 @@ export class HeaderComponent implements OnInit {
   nome = environment.nome;
   foto = environment.foto;
   id = environment.id;
+  username = environment.username;
 
   constructor(
     private router: Router

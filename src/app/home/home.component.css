@@ -268,7 +268,7 @@ section .feed-noticias .feed .postagem-usuario .header {
   border-top: 0px solid var(--border-gray) !important;
   border-left: 0px solid var(--border-gray) !important;
   border-right: 0px solid var(--border-gray) !important;
-  border-bottom: 0px solid var(--border-gray-ligth) !important;
+  border-bottom: 1px solid var(--border-gray-ligth) !important;
 
   display: flex;
   align-items: center;
@@ -276,7 +276,14 @@ section .feed-noticias .feed .postagem-usuario .header {
 
 }
 
-section .feed-noticias .feed .postagem-usuario .header .img {
+section .feed-noticias .feed .postagem-usuario .header .usuario-dados-postagem {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+
+}
+
+section .feed-noticias .feed .postagem-usuario .header .usuario-dados-postagem .img {
   width: 10%;
   height: auto;
 
@@ -286,7 +293,7 @@ section .feed-noticias .feed .postagem-usuario .header .img {
 
 }
 
-section .feed-noticias .feed .postagem-usuario .header .img img {
+section .feed-noticias .feed .postagem-usuario .header .usuario-dados-postagem .img img {
   padding: 10%;
 
   width: 80%;
@@ -296,13 +303,33 @@ section .feed-noticias .feed .postagem-usuario .header .img img {
 
 }
 
-section .feed-noticias .feed .postagem-usuario .header p {
+section .feed-noticias .feed .postagem-usuario .header .usuario-dados-postagem p {
   margin: 0;
 
   font-weight: 600;
   font-size: 13px;
 
   color: var(--color-text-black);
+
+}
+
+section .feed-noticias .feed .postagem-usuario .header .icone-editar-postagem {
+  width: 6%;
+  height: auto;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  margin-right: 2%;
+
+  cursor: pointer;
+
+}
+
+section .feed-noticias .feed .postagem-usuario .header .icone-editar-postagem svg {
+  width: 100%;
+  height: auto;
 
 }
 
@@ -589,12 +616,34 @@ section .bloco-sugestoes-perfis .sugestoes-perfil .sugestoes-perfil-usuarios .da
 }
 
 section .bloco-sugestoes-perfis .sugestoes-perfil .sugestoes-perfil-usuarios .dados-meu-perfil .meu-perfil .dados-usuario p {
+  width: 100%;
+  height: auto;
+
   font-weight: 400;
   font-size: 12px;
 
   margin: 0;
 
   color: var(--color-text-gray);
+
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+
+}
+
+section .bloco-sugestoes-perfis .sugestoes-perfil .sugestoes-perfil-usuarios .dados-meu-perfil .meu-perfil .dados-usuario p strong {
+  font-family: 'Amaranth', sans-serif;
+  font-weight: 500;
+  font-size: 12px;
+
+  margin: 0;
+
+  color: var(--background-color-button);
+
+  cursor: pointer;
+
+  margin-left: 3% !important;
 
 }
 

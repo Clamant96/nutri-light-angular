@@ -15,7 +15,7 @@
     <a class="iconMedia botao-postagem" data-bs-toggle="modal" data-bs-target="#novoProduto" href="">
       <i class="bi bi-plus-square"></i>
     </a>
-    <a class="iconMedia" routerLink='/categoria'>
+    <a *ngIf='username == "Clamant96"' class="iconMedia" routerLink='/categoria'>
       <i class="bi bi-bookmark-plus"></i>
     </a>
     <a class="iconMedia" href="" routerLink='/home' data-bs-toggle="modal" data-bs-target="#listasProdutos">

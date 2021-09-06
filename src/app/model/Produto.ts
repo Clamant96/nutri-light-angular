@@ -13,4 +13,5 @@ export class Produto {
   public mensagens: Mensagem[];
   public usuario: Usuario;
   public like: Usuario[];
+  public categoriaTipoIMC: string;
 }

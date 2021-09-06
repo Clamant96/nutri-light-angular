@@ -43,10 +43,17 @@
       <div class="postagem-usuario" *ngFor='let produto of listaDeProdutos' >
 
         <div class="header">
-          <div class="img">
-            <img src="{{ produto.usuario.foto }}" alt="{{ produto.usuario.nome }}">
+          <div class="usuario-dados-postagem">
+            <div class="img">
+              <img src="{{ produto.usuario.foto }}" alt="{{ produto.usuario.nome }}">
+            </div>
+            <p>{{ produto.usuario.username }}</p>
           </div>
-          <p>{{ produto.usuario.username }}</p>
+          <div class="icone-editar-postagem" data-bs-toggle="modal" data-bs-target="#editarProduto" (click)='findByIdProduto(produto.id)' >
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-three-dots" viewBox="0 0 16 16">
+              <path d="M3 9.5a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3z"/>
+            </svg>
+          </div>
         </div>
 
         <div class="img-postagem" data-bs-toggle="modal" data-bs-target="#focoProdutoModal" (click)="findByIdProdutoModal(produto.id)" >
@@ -141,7 +148,7 @@
             <div class="dados-usuario">
               <h6>{{ produtoUsuario.categoria.nome }}</h6>
               <a>{{ produtoUsuario.nome }}</a>
-              <p>Postado por: {{ produtoUsuario.usuario.username }}</p>
+              <p>Postado por: <strong [routerLink]="['/perfil', id]">{{ produtoUsuario.usuario.username }}</strong></p>
             </div>
           </div>
           <button type="button" (click)='removerProduto(produtoUsuario.id, idListaUsuario)' >
@@ -194,6 +201,7 @@
   </div>
 </div>
 
+<!-- ESSE MODAL SERA EXCLUIDO, ELE E FERETENTE A LISTAGEM DE POSTAGENS MAS ISSO NAO TEM MAIS NECESSIDADE DE SER DESSA FORMA POR JA TEMOS O FEED -->
 <!-- Modal -->
 <div class="modal fade" id="listasProdutos" tabindex="-1" role="dialog" aria-labelledby="ModallistasProdutos" aria-hidden="true">
   <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
@@ -263,6 +271,16 @@
                       <option *ngFor='let categorias of listaDeCategoria' value="{{categorias.id}}">{{categorias.nome}}</option>
                   </select>
               </div>
+              <div class="form-group texto">
+                <!-- O ATRIBUTO data-dismiss="modal", FAZ COM QUE O ITEM INFORMADO SEJA FINALIZADO POR COMPLETO -->
+                <label class="texto-gray" for="texto">Escolha uma categoria de IMC: </label>
+                <!-- POR MEIO DA ESCOLHA DO USUARIO E PELO METODO (CHANGE) E CAPITURADO O ID DA OPCAO ESCOLHIDA PELO USUARIO -->
+                <select [(ngModel)]='categoriaIMCInserirProduto' class="form-control texto-input" name="caegoria-imc" id="caegoria-imc" >
+                    <!-- CRIA UM LOOP FOR PARA MOSTRAR TODAS AS OPCOES CONTIDAS DENTRO DA BADE DE DADOS DE TEMA -->
+                    <!-- TRAZ O VALOR DO ID DE CADA TEMA E DEIXA-O ARMAZENDO DENTRO DO VALUE="id" -->
+                    <option *ngFor='let categoriasIMC of tipoCategoriaIMC' value="{{categoriasIMC}}">{{categoriasIMC}}</option>
+                </select>
+            </div>
               <div class="d-flex justify-content-end">
                 <button class="botao margem-botao cancelar" data-bs-dismiss="modal" aria-label="Close" >Cancelar</button>
                 <button class="botao margem-botao" data-bs-dismiss="modal" aria-label="Close" (click)='atualizar()' >Editar</button>

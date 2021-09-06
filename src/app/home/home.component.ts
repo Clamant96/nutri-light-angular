@@ -24,6 +24,10 @@ export class HomeComponent implements OnInit {
   imcMemoria: string;
   classificacao: string;
   obesidade: string;
+  tipoIMC: string;
+
+  tipoCategoriaIMC = [' Global', 'Magreza', 'Normal', 'Sobrepeso', 'Obesidade', 'Obesidade Grave'];
+  categoriaIMCInserirProduto: string;
 
   img = environment.foto;
   username = environment.username;
@@ -31,6 +35,7 @@ export class HomeComponent implements OnInit {
   idade = environment.idade;
   peso = environment.peso;
   altura = environment.altura;
+  id = environment.id;
 
   produto: Produto = new Produto();
   listaDeProdutos: Produto[];
@@ -188,6 +193,26 @@ export class HomeComponent implements OnInit {
       //console.log('DADOS OBTIDOS DA REQUEST DE CATEGORIA: '+ this.produtosDaCategoria.nome);
       //console.log(this.listaRecuperadaDaCategoria);
 
+      /* ============================= */
+      /* === CATEGORIA IMC USUARIO === */
+      /* ============================= */
+      if(this.imc < 18.5) {
+        this.classificacao = 'Magreza';
+
+      }else if(this.imc >= 18.5 && this.imc <= 24.9) {
+        this.classificacao = 'Normal';
+
+      }else if(this.imc >= 25.0 && this.imc <= 29.9) {
+        this.classificacao = 'Sobrepeso I';
+
+      }else if(this.imc >= 30.0 && this.imc <= 39.9) {
+        this.classificacao = 'Obesidade II';
+
+      }else if(this.imc >= 40.0) {
+        this.classificacao = 'Obesidade Grave III';
+
+      }
+
       /* =================================================================== */
       /* == RECURSAO PARA DEFINIR OS PRODUTOS MAIS UTILIZADOS NO SISTEMA === */
       /* =================================================================== */
@@ -213,19 +238,29 @@ export class HomeComponent implements OnInit {
       /* PARA CADA CATEGORIA SE TEM UMA QTD MAXIMA DE PRODUTOS PERMITIDOS */
       for(let i = 0; i < this.listaRecuperadaDaCategoria.length; i++) {
         // 2 -> proteínas
-        if(this.produtosDaCategoria.id == 1 && memoria.length < 2) {
+        // qtd de itens max. 2 itens
+        // categoria IMC produto
+        console.log('IMC: ');
+        console.log(this.listaRecuperadaDaCategoria[i].categoriaTipoIMC);
+        if(this.produtosDaCategoria.id == 1 && memoria.length < 2 || this.listaRecuperadaDaCategoria[i].categoriaTipoIMC == this.classificacao) {
           memoria.push(this.listaRecuperadaDaCategoria[i]);
 
         // 3 -> carboidratos
-        }else if(this.produtosDaCategoria.id == 2 && memoria.length < 3) {
+        // qtd de itens max. 3 itens
+        // categoria IMC produto
+        }else if(this.produtosDaCategoria.id == 2 && memoria.length < 3 || this.listaRecuperadaDaCategoria[i].categoriaTipoIMC == this.classificacao) {
           memoria.push(this.listaRecuperadaDaCategoria[i]);
 
         // 5 -> verduras
-        }else if(this.produtosDaCategoria.id == 3 && memoria.length < 5) {
+        // qtd de itens max. 5 itens
+        // categoria IMC produto
+        }else if(this.produtosDaCategoria.id == 3 && memoria.length < 5 || this.listaRecuperadaDaCategoria[i].categoriaTipoIMC == this.classificacao) {
           memoria.push(this.listaRecuperadaDaCategoria[i]);
 
         // 3 -> frutas
-        }else if(this.produtosDaCategoria.id == 4 && memoria.length < 3) {
+        // qtd de itens max. 3 itens
+        // categoria IMC produto
+        }else if(this.produtosDaCategoria.id == 4 && memoria.length < 3 || this.listaRecuperadaDaCategoria[i].categoriaTipoIMC == this.classificacao) {
           memoria.push(this.listaRecuperadaDaCategoria[i]);
 
         }
@@ -339,6 +374,25 @@ export class HomeComponent implements OnInit {
 
     this.produto.usuario = this.usuario;
 
+    if(environment.imc < 18.5) {
+      this.tipoIMC = 'Magreza';
+
+    }else if(environment.imc >= 18.5 && environment.imc <= 24.9) {
+      this.tipoIMC = 'Normal';
+
+    }else if(environment.imc >= 25.0 && environment.imc <= 29.9) {
+      this.tipoIMC = 'Sobrepeso I';
+
+    }else if(environment.imc >= 30.0 && environment.imc <= 39.9) {
+      this.tipoIMC = 'Obesidade II';
+
+    }else if(environment.imc >= 40.0) {
+      this.tipoIMC = 'Obesidade Grave III';
+
+    }
+
+    this.produto.categoriaTipoIMC = this.tipoIMC;
+
     /* CHAMA O METODO DE PostagemService E REALIZA UM NOVO (POST), AGORA COM TODOS OS DADOS INSERIDOS */
     this.produtosService.postProduto(this.produto).subscribe((resp: Produto) => {
       this.produto = resp;
@@ -439,7 +493,14 @@ export class HomeComponent implements OnInit {
   /* ATUALIZA UMA POSTAGEM NA BASE DE DADOS */
   atualizar() {
     this.categoria.id = this.idCategoria;
+    this.usuario.id = environment.id;
+
+    this.produto.usuario = this.usuario;
     this.produto.categoria = this.categoria;
+    this.produto.categoriaTipoIMC = this.categoriaIMCInserirProduto;
+
+    console.log('OBJ ATUALIZADO: ');
+    console.log(this.produto)
 
     this.produtosService.putProduto(this.produto).subscribe((resp: Produto) => {
       this.produto = resp;
@@ -447,10 +508,12 @@ export class HomeComponent implements OnInit {
       alert('Postagem atualizada com sucesso!');
 
       this.findByIdListaUsuario();
+      this.findAllByProdutos();
 
     }, erro => {
       if(erro.status == 500 || erro.status == 400) {
         alert('Ocorreu um erro ao atualizar o produto!');
+        console.log(erro)
 
       }
 
