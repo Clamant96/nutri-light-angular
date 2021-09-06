@@ -564,6 +564,35 @@ section .bloco-sugestoes-perfis .sugestoes-perfil .sugestoes-perfil-usuarios h5 
 
   color: var(--color-text-gray);
 
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+}
+
+section .bloco-sugestoes-perfis .sugestoes-perfil .sugestoes-perfil-usuarios h5 .botoes {
+  font-weight: 600;
+  font-size: 14px;
+
+  color: var(--color-text-gray);
+
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-evenly;
+
+  width: 20%;
+  height: auto;
+
+}
+
+section .bloco-sugestoes-perfis .sugestoes-perfil .sugestoes-perfil-usuarios h5 .botoes svg {
+  cursor: pointer;
+
+}
+
+section .bloco-sugestoes-perfis .sugestoes-perfil .sugestoes-perfil-usuarios h5 .botoes svg:hover {
+  color: var(--background-color-button-hover);
+
 }
 
 section .bloco-sugestoes-perfis .sugestoes-perfil .sugestoes-perfil-usuarios .dados-meu-perfil {
@@ -599,6 +628,22 @@ section .bloco-sugestoes-perfis .sugestoes-perfil .sugestoes-perfil-usuarios .da
 
   padding: 2%;
   margin-left: 5%;
+
+}
+
+section .bloco-sugestoes-perfis .sugestoes-perfil .sugestoes-perfil-usuarios .dados-meu-perfil .lista-vazia {
+  font-family: 'Amaranth', sans-serif;
+  font-weight: 500;
+  font-size: 12px;
+
+  margin: 0;
+
+  color: var(--background-color-button);
+
+  cursor: pointer;
+
+  width: 100%;
+  height: auto;
 
 }
 

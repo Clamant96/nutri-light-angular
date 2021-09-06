@@ -87,6 +87,7 @@ export class HomeComponent implements OnInit {
     this.findAllByCategorias();
     this.geradorIMC();
     this.findAllByCategoria(this.idListaUsuario);
+    this.gerarNovaListaAutomatica(this.id);
 
   }
 
@@ -240,27 +241,25 @@ export class HomeComponent implements OnInit {
         // 2 -> proteínas
         // qtd de itens max. 2 itens
         // categoria IMC produto
-        console.log('IMC: ');
-        console.log(this.listaRecuperadaDaCategoria[i].categoriaTipoIMC);
-        if(this.produtosDaCategoria.id == 1 && memoria.length < 2 || this.listaRecuperadaDaCategoria[i].categoriaTipoIMC == this.classificacao) {
+        if(this.produtosDaCategoria.id == 1 && memoria.length < 2 /*|| this.listaRecuperadaDaCategoria[i].categoriaTipoIMC == this.classificacao*/) {
           memoria.push(this.listaRecuperadaDaCategoria[i]);
 
         // 3 -> carboidratos
         // qtd de itens max. 3 itens
         // categoria IMC produto
-        }else if(this.produtosDaCategoria.id == 2 && memoria.length < 3 || this.listaRecuperadaDaCategoria[i].categoriaTipoIMC == this.classificacao) {
+        }else if(this.produtosDaCategoria.id == 2 && memoria.length < 3 /*|| this.listaRecuperadaDaCategoria[i].categoriaTipoIMC == this.classificacao*/) {
           memoria.push(this.listaRecuperadaDaCategoria[i]);
 
         // 5 -> verduras
         // qtd de itens max. 5 itens
         // categoria IMC produto
-        }else if(this.produtosDaCategoria.id == 3 && memoria.length < 5 || this.listaRecuperadaDaCategoria[i].categoriaTipoIMC == this.classificacao) {
+        }else if(this.produtosDaCategoria.id == 3 && memoria.length < 5 /*|| this.listaRecuperadaDaCategoria[i].categoriaTipoIMC == this.classificacao*/) {
           memoria.push(this.listaRecuperadaDaCategoria[i]);
 
         // 3 -> frutas
         // qtd de itens max. 3 itens
         // categoria IMC produto
-        }else if(this.produtosDaCategoria.id == 4 && memoria.length < 3 || this.listaRecuperadaDaCategoria[i].categoriaTipoIMC == this.classificacao) {
+        }else if(this.produtosDaCategoria.id == 4 && memoria.length < 3 /*|| this.listaRecuperadaDaCategoria[i].categoriaTipoIMC == this.classificacao*/) {
           memoria.push(this.listaRecuperadaDaCategoria[i]);
 
         }
@@ -603,6 +602,30 @@ export class HomeComponent implements OnInit {
     }
 
     this.findByIdListaUsuario();
+
+  }
+
+  removerProdutosDaListaDoUsuario(idUsuario: number) {
+    for(let i = 0; i < this.listaUsuario.length; i++) {
+      this.produtosService.removerProdutoAListaDoUsuario(this.listaUsuario[i].id, idUsuario).subscribe(() => {
+
+      }, erro => {
+        if(erro.status == 500 || erro.status == 400) {
+          alert('Ocorreu um erro ao remover o produto!');
+
+        }
+
+      });
+
+    }
+
+    this.findByIdListaUsuario();
+    this.findByIdListaUsuario();
+
+  }
+
+  gerarNovaListaAutomatica(idListaUsuario: number) {
+    this.findAllByCategoria(idListaUsuario);
 
   }
 
