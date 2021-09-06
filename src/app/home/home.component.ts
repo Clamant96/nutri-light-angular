@@ -621,6 +621,7 @@ export class HomeComponent implements OnInit {
 
     this.findByIdListaUsuario();
     this.findByIdListaUsuario();
+    this.findByIdListaUsuario();
 
   }
 
