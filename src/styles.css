@@ -118,6 +118,7 @@ hr {
     --background-color-danger-hover: #a01f1f;
     --background-color-header: #ffffff;
     --background-section: #ffffff;
+    --background-tarja: #000000;
 
     --button-ok: #b4b4b4;
 
@@ -140,4 +141,14 @@ hr {
 
     --box-shadow: #262626;
 
+}
+
+/* AJUSTE CONFIGURACAO W3SCHOLLS */
+.w3-button {
+  color: var(--background-color-button-hover) !important;
+}
+
+.w3-button:hover {
+  color: var(--background-color-button-hover) !important;
+  background-color: transparent !important;
 }
