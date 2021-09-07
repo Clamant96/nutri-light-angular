@@ -80,8 +80,8 @@
                     <span onclick="document.getElementById('id01').style.display='none'" class="w3-button w3-display-topright">&times;</span>
                   </div>
                   <div class="comentarios-postagem-usuario">
-                    <h5>{{ produto.usuario.username }}</h5>
-                    <p>{{ produto.nome }}</p>
+                    <h5>{{ nomeCriadorPostagem }}</h5>
+                    <p>{{ mensagemPostagemCriador }}</p>
                   </div>
                   <div class="mensagens-postagem" *ngFor='let mensagem of produtoModalDados.mensagens'>
                     <h5>{{ mensagem.username }}</h5>

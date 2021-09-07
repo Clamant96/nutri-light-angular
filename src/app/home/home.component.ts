@@ -61,6 +61,8 @@ export class HomeComponent implements OnInit {
   minhasPostagens: Produto = new Produto();
 
   produtoModalDados: Produto = new Produto();
+  nomeCriadorPostagem: string;
+  mensagemPostagemCriador: string;
   usernameUsuarioModal: string;
   fotoUsuarioModal: string;
 
@@ -149,6 +151,9 @@ export class HomeComponent implements OnInit {
 
       this.usernameUsuarioModal = this.produtoModalDados.usuario.username;
       this.fotoUsuarioModal = this.produtoModalDados.usuario.foto;
+
+      this.nomeCriadorPostagem = this.produtoModalDados.usuario.username;
+      this.mensagemPostagemCriador = this.produtoModalDados.nome;
 
     }, erro => {
       if(erro.status == 500 || erro.status == 400) {
