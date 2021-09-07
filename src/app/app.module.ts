@@ -12,6 +12,7 @@ import { HomeComponent } from './home/home.component';
 import { CategoriaComponent } from './categoria/categoria.component';
 import { ProdutoComponent } from './editar/produto/produto.component';
 import { PerfilComponent } from './perfil/perfil.component';
+import { UsuarioComponent } from './editar/usuario/usuario.component';
 
 @NgModule({
   declarations: [
@@ -23,6 +24,7 @@ import { PerfilComponent } from './perfil/perfil.component';
     CategoriaComponent,
     ProdutoComponent,
     PerfilComponent,
+    UsuarioComponent,
   ],
   imports: [
     BrowserModule,

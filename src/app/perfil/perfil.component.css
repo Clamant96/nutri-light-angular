@@ -92,8 +92,10 @@ section .bloco-perfil .dados-perfil .nome-perfil .icon {
   align-items: center;
   justify-content: center;
 
-  width: 8%;
+  width: 5%;
   height: auto;
+
+  cursor: pointer;
 
 }
 

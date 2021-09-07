@@ -17,6 +17,7 @@ export class PerfilComponent implements OnInit {
   idUsuario: number;
   totalPostagens: number;
   tipoIMC: string;
+  idUsuarioLogado = environment.id;
 
   postagem: Produto = new Produto();
   usuarioPostagem: Usuario = new Usuario();

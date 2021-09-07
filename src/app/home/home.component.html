@@ -284,7 +284,7 @@
             <div class="dados-usuario">
               <h6>{{ produtoUsuario.categoria.nome }}</h6>
               <a>{{ produtoUsuario.nome }}</a>
-              <p>Postado por: <strong [routerLink]="['/perfil', id]">{{ produtoUsuario.usuario.username }}</strong></p>
+              <p>Postado por: <strong [routerLink]="['/perfil', produtoUsuario.usuario.id]">{{ produtoUsuario.usuario.username }}</strong></p>
             </div>
           </div>
           <button type="button" (click)='removerProduto(produtoUsuario.id, idListaUsuario)' >
