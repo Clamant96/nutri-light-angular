@@ -220,6 +220,7 @@ section {
   display: flex;
   align-items: flex-start;
   justify-content: space-evenly;
+  flex-wrap: wrap;
 
   background-color: var(--background-page);
 
@@ -999,5 +1000,314 @@ section .feed-noticias .feed .postagem-usuario /*.modal .modal-dialog*/ .vizuali
 
   font-size: 16px;
   font-weight: 600;
+
+}
+
+/* OTIMIZACAO HOME */
+@media(max-width: 760px){
+  section {
+    width: 100%;
+    height: auto;
+
+    padding: 0%;
+    margin-top: 10%;
+
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
+
+    background-color: var(--background-page);
+
+  }
+
+  section .feed-noticias {
+    width: 100%;
+    height: auto;
+
+  }
+
+  section .feed-noticias .feed {
+    width: 100%;
+    height: auto;
+
+  }
+
+  section .feed-noticias .feed .postagem-usuario {
+    width: 100%;
+    height: auto;
+
+    margin-top: 5%;
+    margin-bottom: 5%;
+
+    background-color: var(--background-page);
+
+    border: 0px solid var(--border-gray);
+    border-radius: 0px;
+
+  }
+
+  section .feed-noticias .feed .postagem-usuario .header {
+    width: 100%;
+    height: auto;
+
+    padding: 0;
+    margin: 0;
+
+    border-top: 0px solid var(--border-gray) !important;
+    border-left: 0px solid var(--border-gray) !important;
+    border-right: 0px solid var(--border-gray) !important;
+    border-bottom: 1px solid var(--border-gray-ligth) !important;
+
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+
+  }
+
+  section .feed-noticias .feed .postagem-usuario .header .usuario-dados-postagem {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+
+  }
+
+  section .feed-noticias .feed .postagem-usuario .header .usuario-dados-postagem .img {
+    width: 15%;
+    height: auto;
+
+    border-radius: 50%;
+
+    margin-left: 1%;
+
+  }
+
+  section .feed-noticias .feed .postagem-usuario .header .usuario-dados-postagem .img img {
+    padding: 10%;
+
+    width: 80%;
+    height: auto;
+
+    border-radius: 50%;
+
+  }
+
+  section .feed-noticias .feed .postagem-usuario .header .usuario-dados-postagem p {
+    margin: 0;
+
+    font-weight: 600;
+    font-size: 13px;
+
+    color: var(--color-text-black);
+
+  }
+
+  section .feed-noticias .feed .postagem-usuario .header .icone-editar-postagem {
+    width: 20%;
+    height: auto;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    margin-right: 2%;
+
+    cursor: pointer;
+
+  }
+
+  section .feed-noticias .feed .postagem-usuario .header .icone-editar-postagem svg {
+    width: 100%;
+    height: auto;
+
+  }
+
+  section .feed-noticias .feed .postagem-usuario .img-postagem {
+    width: 100%;
+    height: auto;
+
+  }
+
+  section .feed-noticias .feed .postagem-usuario .img-postagem img {
+    width: 100%;
+    height: auto;
+
+  }
+
+  section .feed-noticias .feed .postagem-usuario .acoes-postagem {
+    width: 100%;
+    height: auto;
+
+    padding: 0%;
+    margin-top: 1%;
+
+    display: flex;
+    align-items: flex-end;
+    justify-content: flex-start;
+
+  }
+
+  section .feed-noticias .feed .postagem-usuario .acoes-postagem .icon {
+    width: 7%;
+    height: auto;
+
+    margin: 0% 2%;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    cursor: pointer;
+
+  }
+
+  section .feed-noticias .feed .postagem-usuario .acoes-postagem .icon svg {
+    width: 100%;
+    height: auto;
+
+  }
+
+  section .feed-noticias .feed .postagem-usuario .acoes-postagem .qt-curtidas-postagem {
+    width: 100%;
+    height: auto;
+
+  }
+
+  section .feed-noticias .feed .postagem-usuario .acoes-postagem .qt-curtidas-postagem p {
+    width: 100%;
+    height: auto;
+
+    margin: 0;
+
+    font-weight: 600;
+    font-size: 13px;
+
+    color: var(--color-text-black);
+
+  }
+
+  section .feed-noticias .feed .postagem-usuario .comentarios-postagem-usuario {
+    width: 100%;
+    height: auto;
+
+    padding: 0% 2%;
+    margin-bottom: 1%;
+
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+
+  }
+
+  section .feed-noticias .feed .postagem-usuario .comentarios-postagem-usuario h5 {
+    font-weight: 600;
+    font-size: 14px;
+
+    margin-right: 1% !important;
+    margin: 0;
+
+  }
+
+  section .feed-noticias .feed .postagem-usuario .comentarios-postagem-usuario p {
+    font-weight: 400;
+    font-size: 14px;
+
+    margin: 0;
+
+  }
+
+  section .feed-noticias .feed .postagem-usuario .mensagens-postagem {
+    width: 100%;
+    height: auto;
+
+    padding: 0% 2%;
+
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+
+  }
+
+  section .feed-noticias .feed .postagem-usuario .mensagens-postagem h5 {
+    font-weight: 600;
+    font-size: 14px;
+
+    margin-right: 1% !important;
+    margin: 0;
+
+  }
+
+  section .feed-noticias .feed .postagem-usuario .mensagens-postagem p {
+    font-weight: 400;
+    font-size: 14px;
+
+    margin: 0;
+
+  }
+
+  section .feed-noticias .feed .postagem-usuario .footer {
+    margin-top: 2%;
+    padding: 2% 0%;
+
+    width: 100%;
+    height: auto;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-top: 1px solid var(--border-gray-ligth);
+
+  }
+
+  section .feed-noticias .feed .postagem-usuario .footer .icon {
+    width: 8%;
+    height: auto;
+
+  }
+
+  section .feed-noticias .feed .postagem-usuario .footer .icon svg {
+    padding: 5%;
+
+    width: 90%;
+    height: auto;
+
+    color: var(--color-text-black);
+
+  }
+
+  section .feed-noticias .feed .postagem-usuario .footer .postagem {
+    width: 80%;
+    height: auto;
+
+    padding-left: 1%;
+
+  }
+
+  section .feed-noticias .feed .postagem-usuario .footer .postagem input {
+    width: 100%;
+    height: auto;
+
+    outline: none;
+
+    border: none;
+
+    color: var(--color-text-black);
+
+    background-color: var(--background-page);
+
+  }
+
+  section .feed-noticias .feed .postagem-usuario .footer button {
+    border: none;
+
+    background-color: transparent;
+
+    color: var(--color-text-blue-text-link-2);
+
+    font-size: 16px;
+    font-weight: 600;
+
+  }
 
 }

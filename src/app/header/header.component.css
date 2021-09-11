@@ -255,4 +255,32 @@ header .socialMedias .iconPerfil img {
 
   }
 
+  header .socialMedias .iconMedia {
+    padding: 2.5%;
+    margin: 0.5%;
+
+    width: 13%;
+    height: auto;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background-color: var(--background-color-button);
+    border-radius: 3px 3px 3px 3px;
+
+    transition: background-color, .3s ease-in-out;
+
+  }
+
+  header .socialMedias .iconMedia .bi {
+    color: var(--text-white);
+
+  }
+
+  header .socialMedias .iconMedia:hover {
+    background-color: var(--background-color-button-hover);
+
+  }
+
 }

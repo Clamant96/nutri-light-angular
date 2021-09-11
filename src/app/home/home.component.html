@@ -47,7 +47,7 @@
             <div class="img">
               <img src="{{ produto.usuario.foto }}" alt="{{ produto.usuario.nome }}">
             </div>
-            <p>{{ produto.usuario.username }}</p>
+            <p>{{ produto.usuario.username }} | {{ produto.categoria.nome }}</p>
           </div>
           <div *ngIf='id == produto.usuario.id' class="icone-editar-postagem" data-bs-toggle="modal" data-bs-target="#editarProduto" (click)='findByIdProduto(produto.id)' >
             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-three-dots" viewBox="0 0 16 16">
