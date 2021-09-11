@@ -135,6 +135,9 @@ export class HomeComponent implements OnInit {
     this.produtosService.getAllByIdProduto(id).subscribe((resp: Produto) => {
       this.produto = resp;
 
+      this.idCategoria = this.produto.categoria.id;
+      this.categoriaIMCInserirProduto = this.produto.categoriaTipoIMC;
+
     }, erro => {
       if(erro.status == 500 || erro.status == 400) {
         console.log('Ocorreu um erro ao trazer os dados!');
@@ -246,25 +249,25 @@ export class HomeComponent implements OnInit {
         // 2 -> proteínas
         // qtd de itens max. 2 itens
         // categoria IMC produto
-        if(this.produtosDaCategoria.id == 1 && memoria.length < 2 /*|| this.listaRecuperadaDaCategoria[i].categoriaTipoIMC == this.classificacao*/) {
+        if(this.produtosDaCategoria.id == 1 && memoria.length < 2 && this.listaRecuperadaDaCategoria[i].categoriaTipoIMC == this.classificacao) {
           memoria.push(this.listaRecuperadaDaCategoria[i]);
 
         // 3 -> carboidratos
         // qtd de itens max. 3 itens
         // categoria IMC produto
-        }else if(this.produtosDaCategoria.id == 2 && memoria.length < 3 /*|| this.listaRecuperadaDaCategoria[i].categoriaTipoIMC == this.classificacao*/) {
+        }else if(this.produtosDaCategoria.id == 2 && memoria.length < 3 && this.listaRecuperadaDaCategoria[i].categoriaTipoIMC == this.classificacao) {
           memoria.push(this.listaRecuperadaDaCategoria[i]);
 
         // 5 -> verduras
         // qtd de itens max. 5 itens
         // categoria IMC produto
-        }else if(this.produtosDaCategoria.id == 3 && memoria.length < 5 /*|| this.listaRecuperadaDaCategoria[i].categoriaTipoIMC == this.classificacao*/) {
+        }else if(this.produtosDaCategoria.id == 3 && memoria.length < 5 && this.listaRecuperadaDaCategoria[i].categoriaTipoIMC == this.classificacao) {
           memoria.push(this.listaRecuperadaDaCategoria[i]);
 
         // 3 -> frutas
         // qtd de itens max. 3 itens
         // categoria IMC produto
-        }else if(this.produtosDaCategoria.id == 4 && memoria.length < 3 /*|| this.listaRecuperadaDaCategoria[i].categoriaTipoIMC == this.classificacao*/) {
+        }else if(this.produtosDaCategoria.id == 4 && memoria.length < 3 && this.listaRecuperadaDaCategoria[i].categoriaTipoIMC == this.classificacao) {
           memoria.push(this.listaRecuperadaDaCategoria[i]);
 
         }
@@ -462,14 +465,55 @@ export class HomeComponent implements OnInit {
 
   /* ADICIONA UM PRODUTO ESPECIFICO A LISTA DO USUARIO LOGADO */
   adicionarProduto(idProduto: number, idListaUsuario: number) {
-    this.produtosService.adicionarProdutoAListaDoUsuario(idProduto, idListaUsuario).subscribe(() => {
-      this.findByIdListaUsuario();
 
-      alert('Produto adicionado com sucesso de sua lista!');
+    /* ============================= */
+    /* === CATEGORIA IMC USUARIO === */
+    /* ============================= */
+    if(this.imc < 18.5) {
+      this.classificacao = 'Magreza';
+
+    }else if(this.imc >= 18.5 && this.imc <= 24.9) {
+      this.classificacao = 'Normal';
+
+    }else if(this.imc >= 25.0 && this.imc <= 29.9) {
+      this.classificacao = 'Sobrepeso I';
+
+    }else if(this.imc >= 30.0 && this.imc <= 39.9) {
+      this.classificacao = 'Obesidade II';
+
+    }else if(this.imc >= 40.0) {
+      this.classificacao = 'Obesidade Grave III';
+
+    }
+
+    this.produtosService.getAllByIdProduto(idProduto).subscribe((resp: Produto) => {
+      this.produto = resp;
+
+      console.log(this.produto.categoriaTipoIMC);
+      console.log(this.classificacao);
+
+      if(this.produto.categoriaTipoIMC == this.classificacao) {
+        this.produtosService.adicionarProdutoAListaDoUsuario(idProduto, idListaUsuario).subscribe(() => {
+          this.findByIdListaUsuario();
+
+          alert('Produto adicionado com sucesso de sua lista!');
+
+        }, erro => {
+          if(erro.status == 500 || erro.status == 400) {
+            alert('Ocorreu um erro ao adicionar o produto!');
+
+          }
+
+        });
+
+      }else {
+        alert('Esse produto não pode ser associado a sua lista devido ao seu IMC!!');
+
+      }
 
     }, erro => {
       if(erro.status == 500 || erro.status == 400) {
-        alert('Ocorreu um erro ao adicionar o produto!');
+        console.log('Ocorreu um erro ao trazer os dados!');
 
       }
 
@@ -505,23 +549,28 @@ export class HomeComponent implements OnInit {
 
     console.log('OBJ ATUALIZADO: ');
     console.log(this.produto)
+    if(this.usuario.id == this.produto.usuario.id) {
+      this.produtosService.putProduto(this.produto).subscribe((resp: Produto) => {
+        this.produto = resp;
 
-    this.produtosService.putProduto(this.produto).subscribe((resp: Produto) => {
-      this.produto = resp;
+        alert('Postagem atualizada com sucesso!');
 
-      alert('Postagem atualizada com sucesso!');
+        this.findByIdListaUsuario();
+        this.findAllByProdutos();
 
-      this.findByIdListaUsuario();
-      this.findAllByProdutos();
+      }, erro => {
+        if(erro.status == 500 || erro.status == 400) {
+          alert('Ocorreu um erro ao atualizar o produto!');
+          console.log(erro)
 
-    }, erro => {
-      if(erro.status == 500 || erro.status == 400) {
-        alert('Ocorreu um erro ao atualizar o produto!');
-        console.log(erro)
+        }
 
-      }
+      });
 
-    });
+    }else {
+      alert('Essa postagem so pode ser editada pelo criador dela!!');
+
+    }
 
   }
 

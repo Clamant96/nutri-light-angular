@@ -97,6 +97,8 @@ export class PerfilComponent implements OnInit {
       if(erro.status == 500 || erro.status == 400) {
         alert('Ocorreu um erro ao tentar carregar suas postagens!');
 
+        this.logout();
+
         this.router.navigate(['/login']);
 
       }
@@ -129,6 +131,21 @@ export class PerfilComponent implements OnInit {
     });
 
     this.postagem = new Produto();
+
+  }
+
+  logout() {
+    environment.id = 0;
+    environment.nome = '';
+    environment.idade = 0;
+    environment.peso = 0;
+    environment.username = '';
+    environment.senha = '';
+    environment.altura = 0;
+    environment.token = '';
+    environment.foto = '';
+    environment.imc = 0;
+    environment.lista = 0;
 
   }
 
