@@ -1310,4 +1310,8 @@ section .feed-noticias .feed .postagem-usuario /*.modal .modal-dialog*/ .vizuali
 
   }
 
+  #id01 {
+    display: none !important;
+  }
+
 }

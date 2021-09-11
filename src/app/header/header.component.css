@@ -283,4 +283,24 @@ header .socialMedias .iconPerfil img {
 
   }
 
+  header .socialMedias .iconPerfilUsuario {
+    margin-right: 4%;
+
+    width: 11%;
+    height: auto;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+  }
+
+  header .socialMedias .iconPerfilUsuario img {
+    width: 48px;
+    height: auto;
+
+    border-radius: 3px;
+
+  }
+
 }
