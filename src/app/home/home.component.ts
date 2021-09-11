@@ -194,6 +194,7 @@ export class HomeComponent implements OnInit {
   /* TRAZ OS DADOS DE UMA CATEGORIA ESPECIFICA */
   findByCategoria(idCategoria: number, idListaUsuario: number) {
     this.categoriaService.findByIdCategoria(idCategoria).subscribe((resp: Categoria) => {
+      try {
       this.produtosDaCategoria = resp;
 
       /* ATRIBUE OS PRODUTOS DAQUELA DETERMINADA CADEGORIA AO ARRAY DE PRODUTOS TEMPORARIO */
@@ -283,6 +284,11 @@ export class HomeComponent implements OnInit {
 
       memoria = [];
 
+      }catch(e) {
+        console.log('Foi identificado um erro!!');
+        console.log(e);
+
+      }
     }, erro => {
       if(erro.status == 500 || erro.status == 400) {
         console.log('Ocorreu um erro ao trazer os dados!');

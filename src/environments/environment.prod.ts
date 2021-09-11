@@ -14,6 +14,5 @@ export const environment = {
   lista: 0,
   token: '',
   foto: '',
-  imc: 0,
-  categoriaTipoIMC: ''
+  imc: 0
 };

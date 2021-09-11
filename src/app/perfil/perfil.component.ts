@@ -95,11 +95,29 @@ export class PerfilComponent implements OnInit {
 
     }, erro => {
       if(erro.status == 500 || erro.status == 400) {
-        alert('Ocorreu um erro ao tentar carregar suas postagens!');
+        //alert('Ocorreu um erro ao tentar carregar suas postagens!');
 
-        this.logout();
+        //this.logout();
 
-        this.router.navigate(['/login']);
+        //this.router.navigate(['/login']);
+
+        this.produtosService.getAllProdutos().subscribe((resp: Produto[]) => {
+
+          let memoria = [];
+
+          for(let i = 0; i < resp.length; i++) {
+            if(resp[i].usuario.id == this.idUsuarioLogado) {
+              memoria.push(resp[i]);
+            }
+          }
+
+          this.listaDePostagens = memoria;
+
+          console.log(this.listaDePostagens);
+
+          this.totalPostagens = this.listaDePostagens.length;
+
+        });
 
       }
 
