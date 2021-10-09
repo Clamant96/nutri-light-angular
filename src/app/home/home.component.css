@@ -1358,4 +1358,236 @@ section .feed-noticias .feed .postagem-usuario /*.modal .modal-dialog*/ .vizuali
     display: none !important;
   }
 
+  .vizualizar-minha-lista {
+    width: 100%;
+    height: auto;
+
+    background-color: var(--background-section);
+
+  }
+
+  .vizualizar-minha-lista .bloco-sugestoes-perfis .sugestoes-perfil .sugestoes-perfil-usuarios .dados-meu-perfil .meu-perfil .dados-usuario p strong {
+    font-family: 'Amaranth', sans-serif;
+    font-weight: 500;
+    font-size: 12px;
+
+    margin: 0;
+
+    color: var(--background-color-button);
+
+    cursor: pointer;
+
+    margin-left: 3% !important;
+
+  }
+
+  .vizualizar-minha-lista .bloco-sugestoes-perfis .sugestoes-perfil .sugestoes-perfil-usuarios .dados-meu-perfil .meu-perfil .img {
+    width: 10%;
+    height: auto;
+
+  }
+
+  .vizualizar-minha-lista .bloco-sugestoes-perfis .sugestoes-perfil .sugestoes-perfil-usuarios .dados-meu-perfil .meu-perfil .img img {
+    width: 100%;
+    height: auto;
+
+    border-radius: 50%;
+
+  }
+
+  .vizualizar-minha-lista .bloco-sugestoes-perfis .sugestoes-perfil .sugestoes-perfil-usuarios .dados-meu-perfil button {
+    border: none;
+
+    background-color: transparent;
+
+    color: var(--color-text-blue-text-link-2);
+
+    font-size: 12px;
+    font-weight: 600;
+
+  }
+
+  .vizualizar-minha-lista .bloco-sugestoes-perfis .sugestoes-perfil .sugestoes-perfil-usuarios {
+    width: 100%;
+    height: auto;
+
+    display: flex;
+    align-items: flex-start;
+    flex-direction: column;
+    justify-content: center;
+
+    margin-top: 5%;
+
+  }
+
+  .vizualizar-minha-lista .bloco-sugestoes-perfis .sugestoes-perfil .sugestoes-perfil-usuarios h5 {
+    width: 100%;
+    height: auto;
+
+    font-weight: 600;
+    font-size: 14px;
+
+    margin: 0;
+    margin-bottom: 1% !important;
+
+    color: var(--color-text-gray);
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+  }
+
+  .vizualizar-minha-lista .bloco-sugestoes-perfis .sugestoes-perfil .sugestoes-perfil-usuarios h5 .botoes {
+    font-weight: 600;
+    font-size: 14px;
+
+    color: var(--color-text-gray);
+
+    display: flex;
+    align-items: flex-end;
+    justify-content: flex-end;
+
+    padding: 0.5%;
+
+    width: 99%;
+    height: auto;
+
+  }
+
+  .vizualizar-minha-lista .bloco-sugestoes-perfis .sugestoes-perfil .sugestoes-perfil-usuarios h5 .botoes svg {
+    cursor: pointer;
+
+    margin: 0% 2%;
+
+  }
+
+  .vizualizar-minha-lista .bloco-sugestoes-perfis .sugestoes-perfil .sugestoes-perfil-usuarios h5 .botoes svg:hover {
+    color: var(--background-color-button-hover);
+
+  }
+
+  .vizualizar-minha-lista .bloco-sugestoes-perfis .sugestoes-perfil .sugestoes-perfil-usuarios .dados-meu-perfil {
+    width: 100%;
+    height: auto;
+
+    margin-top: 1%;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+  }
+
+  .vizualizar-minha-lista .bloco-sugestoes-perfis .sugestoes-perfil .sugestoes-perfil-usuarios .dados-meu-perfil .meu-perfil {
+    width: 80%;
+    height: auto;
+
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+
+  }
+
+  .vizualizar-minha-lista .bloco-sugestoes-perfis .sugestoes-perfil .sugestoes-perfil-usuarios .dados-meu-perfil .meu-perfil .dados-usuario {
+    display: flex;
+    align-items: flex-start;
+    flex-direction: column;
+    justify-content: center;
+
+    width: 80%;
+    height: auto;
+
+    padding: 2%;
+    margin-left: 5%;
+
+  }
+
+  .vizualizar-minha-lista .bloco-sugestoes-perfis .sugestoes-perfil .sugestoes-perfil-usuarios .dados-meu-perfil .lista-vazia {
+    font-family: 'Amaranth', sans-serif;
+    font-weight: 500;
+    font-size: 12px;
+
+    margin: 0;
+
+    color: var(--background-color-button);
+
+    cursor: pointer;
+
+    width: 100%;
+    height: auto;
+
+  }
+
+  .vizualizar-minha-lista .bloco-sugestoes-perfis .sugestoes-perfil .sugestoes-perfil-usuarios .dados-meu-perfil .meu-perfil .dados-usuario a {
+    font-weight: 600;
+    font-size: 14px;
+
+    margin-right: 1% !important;
+    margin: 0;
+
+    color: var(--color-text-black);
+
+    text-decoration: none !important;
+
+  }
+
+  .vizualizar-minha-lista .bloco-sugestoes-perfis .sugestoes-perfil .sugestoes-perfil-usuarios .dados-meu-perfil .meu-perfil .dados-usuario p {
+    width: 100%;
+    height: auto;
+
+    font-weight: 400;
+    font-size: 12px;
+
+    margin: 0;
+
+    color: var(--color-text-gray);
+
+    /*display: flex;
+    align-items: center;
+    justify-content: flex-start;*/
+
+  }
+
+  .vizualizar-minha-lista .bloco-sugestoes-perfis .sugestoes-perfil .sugestoes-perfil-usuarios .dados-meu-perfil .meu-perfil .dados-usuario p strong {
+    font-family: 'Amaranth', sans-serif;
+    font-weight: 500;
+    font-size: 12px;
+
+    margin: 0;
+
+    color: var(--background-color-button);
+
+    cursor: pointer;
+
+    margin-left: 3% !important;
+
+  }
+
+  .vizualizar-minha-lista .bloco-sugestoes-perfis .sugestoes-perfil .sugestoes-perfil-usuarios .dados-meu-perfil .meu-perfil .img {
+    width: 10%;
+    height: auto;
+
+  }
+
+  .vizualizar-minha-lista .bloco-sugestoes-perfis .sugestoes-perfil .sugestoes-perfil-usuarios .dados-meu-perfil .meu-perfil .img img {
+    width: 100%;
+    height: auto;
+
+    border-radius: 50%;
+
+  }
+
+  .vizualizar-minha-lista .bloco-sugestoes-perfis .sugestoes-perfil .sugestoes-perfil-usuarios .dados-meu-perfil button {
+    border: none;
+
+    background-color: transparent;
+
+    color: var(--color-text-blue-text-link-2);
+
+    font-size: 12px;
+    font-weight: 600;
+
+  }
+
 }

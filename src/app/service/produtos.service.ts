@@ -14,7 +14,8 @@ export class ProdutosService {
 
   /* CRIA UM TOKEN, PARA REALIZAR A AUTENTICACAO DO ENDPOINT, POR MEIO DO METODO Authorization, PASSANDO COMO PAREMTRO O TOKEN DO USUARIO LOGADO */
   autorizacao = {
-    headers: new HttpHeaders().set('Authorization', environment.token)
+    //headers: new HttpHeaders().set('Authorization', environment.token)
+    headers: new HttpHeaders().set('Authorization', localStorage.getItem('token') || '')
 
   }
 

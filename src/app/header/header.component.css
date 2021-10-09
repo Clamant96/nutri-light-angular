@@ -83,6 +83,11 @@ header .socialMedias .iconMedia {
 
 }
 
+header .socialMedias #redimensionamento {
+  display: none;
+
+}
+
 header .socialMedias .iconMedia .bi {
   color: var(--text-white);
 
@@ -270,6 +275,15 @@ header .socialMedias .iconPerfil img {
     border-radius: 3px 3px 3px 3px;
 
     transition: background-color, .3s ease-in-out;
+
+  }
+
+  header .socialMedias #redimensionamento {
+    display: block;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
 
   }
 
