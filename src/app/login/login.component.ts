@@ -64,6 +64,10 @@ export class LoginComponent implements OnInit {
       console.log(environment.foto);
       console.log(environment.imc);
 
+
+      /* ARMAZENA O TOKEN DO USUARIO NO LOCAL STORAGE */
+      localStorage.setItem('token', environment.token);
+
       this.router.navigate(['/home']);
 
     }, erro => {

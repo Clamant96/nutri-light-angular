@@ -30,7 +30,7 @@ export class ProdutoComponent implements OnInit {
   ngOnInit() {
     window.scroll(0, 0);
 
-    if(environment.token == '') {
+    if(localStorage.getItem('token') == null) {
       this.router.navigate(['/login']);
 
     }
