@@ -207,6 +207,24 @@ label {
 
 }
 
+.texto-bold {
+  font-family: 'Amaranth', sans-serif;
+  font-weight: 700;
+  font-size: 30px;
+
+  color: var(--color-text-black);
+
+}
+
+.texto {
+  font-family: 'Amaranth', sans-serif;
+  font-weight: 700;
+  font-size: 16px;
+
+  color: var(--text-white);
+
+}
+
 /* ========================= */
 /* === NOVA CONFIGURACAO === */
 /* ========================= */
@@ -311,6 +329,17 @@ section .feed-noticias .feed .postagem-usuario .header .usuario-dados-postagem p
   font-size: 13px;
 
   color: var(--color-text-black);
+
+}
+
+section .feed-noticias .feed .postagem-usuario .header .usuario-dados-postagem p strong {
+  margin: 0;
+
+  font-weight: 600;
+  font-size: 13px;
+  font-family: 'Amaranth', sans-serif;
+
+  color: var(--background-color-button);
 
 }
 
@@ -672,9 +701,9 @@ section .bloco-sugestoes-perfis .sugestoes-perfil .sugestoes-perfil-usuarios .da
 
   color: var(--color-text-gray);
 
-  display: flex;
+  /*display: flex;
   align-items: center;
-  justify-content: flex-start;
+  justify-content: flex-start;*/
 
 }
 
@@ -1099,6 +1128,17 @@ section .feed-noticias .feed .postagem-usuario /*.modal .modal-dialog*/ .vizuali
     font-size: 13px;
 
     color: var(--color-text-black);
+
+  }
+
+  section .feed-noticias .feed .postagem-usuario .header .usuario-dados-postagem p strong {
+    margin: 0;
+
+    font-weight: 600;
+    font-size: 13px;
+    font-family: 'Amaranth', sans-serif;
+
+    color: var(--background-color-button);
 
   }
 
