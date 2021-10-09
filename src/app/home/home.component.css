@@ -330,6 +330,8 @@ section .feed-noticias .feed .postagem-usuario .header .usuario-dados-postagem p
 
   color: var(--color-text-black);
 
+  cursor: pointer;
+
 }
 
 section .feed-noticias .feed .postagem-usuario .header .usuario-dados-postagem p strong {
@@ -1128,6 +1130,8 @@ section .feed-noticias .feed .postagem-usuario /*.modal .modal-dialog*/ .vizuali
     font-size: 13px;
 
     color: var(--color-text-black);
+
+    cursor: pointer;
 
   }
 
