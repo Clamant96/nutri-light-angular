@@ -1,3 +1,4 @@
+import { AlertasService } from './../service/alertas.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AuthService } from './../service/auth.service';
 import { Produto } from './../model/Produto';
@@ -29,7 +30,8 @@ export class PerfilComponent implements OnInit {
     private authService: AuthService,
     private produtosService: ProdutosService,
     private router: Router,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private alertas: AlertasService
 
   ) { }
 
@@ -134,7 +136,7 @@ export class PerfilComponent implements OnInit {
 
       }, erro => {
         if(erro.status == 500 || erro.status == 400) {
-          alert('Ocorreu um erro ao tentar vizualizar a postagem!');
+          this.alertas.showAlertInfo('Ocorreu um erro ao tentar vizualizar a postagem!');
 
         }
 
@@ -142,7 +144,7 @@ export class PerfilComponent implements OnInit {
 
     }, erro => {
       if(erro.status == 500 || erro.status == 400) {
-        alert('Ocorreu um erro ao tentar abrir a postagem!');
+        this.alertas.showAlertInfo('Ocorreu um erro ao tentar abrir a postagem!');
 
       }
 

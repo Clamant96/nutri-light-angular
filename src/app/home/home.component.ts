@@ -1,3 +1,4 @@
+import { AlertasService } from './../service/alertas.service';
 import { MensagemService } from './../service/mensagem.service';
 import { Mensagem } from './../model/Mensagem';
 import { AuthService } from './../service/auth.service';
@@ -66,13 +67,17 @@ export class HomeComponent implements OnInit {
   usernameUsuarioModal: string;
   fotoUsuarioModal: string;
 
+  key = 'data';
+  reverse = true;
+
   constructor(
     private produtosService: ProdutosService,
     private listaService: ListaService,
     private categoriaService: CategoriaService,
     private authService: AuthService,
     private mensagemService: MensagemService,
-    private router: Router
+    private router: Router,
+    private alertas: AlertasService
 
   ) { }
 
@@ -410,7 +415,7 @@ export class HomeComponent implements OnInit {
     this.produtosService.postProduto(this.produto).subscribe((resp: Produto) => {
       this.produto = resp;
 
-      alert('Postagem realizada com sucesso!');
+      this.alertas.showAlertSuccess('Postagem realizada com sucesso!');
 
       this.produto = new Produto();
 
@@ -418,7 +423,7 @@ export class HomeComponent implements OnInit {
 
     }, erro => {
       if(erro.status == 500 || erro.status == 400) {
-        alert('O correu um erro ao cadastrar o produto');
+        this.alertas.showAlertDanger('O correu um erro ao cadastrar o produto');
       }
 
     });
@@ -443,7 +448,7 @@ export class HomeComponent implements OnInit {
 
     }, erro => {
       if(erro.status == 500) {
-        alert('O correu um erro ao tentar realizar o comentarios!');
+        this.alertas.showAlertDanger('O correu um erro ao tentar postar o comentarios!');
 
       }
 
@@ -502,18 +507,18 @@ export class HomeComponent implements OnInit {
         this.produtosService.adicionarProdutoAListaDoUsuario(idProduto, idListaUsuario).subscribe(() => {
           this.findByIdListaUsuario();
 
-          alert('Produto adicionado com sucesso de sua lista!');
+          this.alertas.showAlertSuccess('Produto adicionado com sucesso de sua lista!');
 
         }, erro => {
           if(erro.status == 500 || erro.status == 400) {
-            alert('Ocorreu um erro ao adicionar o produto!');
+            this.alertas.showAlertDanger('Ocorreu um erro ao adicionar o produto!');
 
           }
 
         });
 
       }else {
-        alert('Esse produto não pode ser associado a sua lista devido ao seu IMC!!');
+        this.alertas.showAlertInfo('Esse produto não pode ser associado a sua lista devido ao seu IMC!!');
 
       }
 
@@ -532,11 +537,11 @@ export class HomeComponent implements OnInit {
     this.produtosService.removerProdutoAListaDoUsuario(idProduto, idListaUsuario).subscribe(() => {
       this.findByIdListaUsuario();
 
-      alert('Produto removido com sucesso de sua lista!');
+      this.alertas.showAlertSuccess('Produto removido com sucesso de sua lista!');
 
     }, erro => {
       if(erro.status == 500 || erro.status == 400) {
-        alert('Ocorreu um erro ao remover o produto!');
+        this.alertas.showAlertDanger('Ocorreu um erro ao remover o produto!');
 
       }
 
@@ -559,14 +564,14 @@ export class HomeComponent implements OnInit {
       this.produtosService.putProduto(this.produto).subscribe((resp: Produto) => {
         this.produto = resp;
 
-        alert('Postagem atualizada com sucesso!');
+        this.alertas.showAlertSuccess('Postagem atualizada com sucesso!');
 
         this.findByIdListaUsuario();
         this.findAllByProdutos();
 
       }, erro => {
         if(erro.status == 500 || erro.status == 400) {
-          alert('Ocorreu um erro ao atualizar o produto!');
+          this.alertas.showAlertDanger('Ocorreu um erro ao atualizar o produto!');
           console.log(erro)
 
         }
@@ -574,7 +579,7 @@ export class HomeComponent implements OnInit {
       });
 
     }else {
-      alert('Essa postagem so pode ser editada pelo criador dela!!');
+      this.alertas.showAlertInfo('Essa postagem so pode ser editada pelo criador dela!!');
 
     }
 
@@ -654,7 +659,11 @@ export class HomeComponent implements OnInit {
 
       },erro => {
         if(erro.status == 500 || erro.status == 400) {
-          alert('Ocorreu um erro ao tentar gera sua lista!');
+          this.alertas.showAlertDanger('Ocorreu um erro ao tentar gera sua lista, realize login novamente!');
+
+          this.authService.logout();
+          this.router.navigate(['/login']);
+
         }
 
       });
@@ -671,7 +680,7 @@ export class HomeComponent implements OnInit {
 
       }, erro => {
         if(erro.status == 500 || erro.status == 400) {
-          alert('Ocorreu um erro ao remover o produto!');
+          this.alertas.showAlertDanger('Ocorreu um erro ao remover o produto!');
 
         }
 

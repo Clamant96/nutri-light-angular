@@ -50,6 +50,21 @@ export class AuthService {
     return ok;
   }
 
+  logout() {
+    environment.id = 0;
+    environment.nome = '';
+    environment.idade = 0;
+    environment.peso = 0;
+    environment.username = '';
+    environment.senha = '';
+    environment.altura = 0;
+    environment.token = '';
+    environment.foto = '';
+    environment.imc = 0;
+    environment.lista = 0;
+
+  }
+
   likeProduto(idUsuario: number, idProduto: number): Observable<Usuario> {
 
     return this.http.put<Usuario>(`${this.url}/usuarios/likes_usuario_postagem/likeProduto/${idProduto}/like/${idUsuario}`, this.autorizacao);

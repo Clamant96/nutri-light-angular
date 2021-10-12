@@ -1,3 +1,4 @@
+import { AlertasService } from './../service/alertas.service';
 import { CategoriaService } from './../service/categoria.service';
 import { Produto } from 'src/app/model/Produto';
 import { ListaService } from './../service/lista.service';
@@ -29,7 +30,9 @@ export class LoginComponent implements OnInit {
     private produtosService: ProdutosService,
     private listaService: ListaService,
     private categoriaService: CategoriaService,
-    private router: Router
+    private router: Router,
+    private alertas: AlertasService
+
   ) { }
 
   ngOnInit() {
@@ -72,7 +75,7 @@ export class LoginComponent implements OnInit {
 
     }, erro => {
       if(erro.status == 500) {
-        alert('Usuario ou senha estao incorretos!');
+        this.alertas.showAlertDanger('Usuario ou senha estao incorretos!');
 
       }
 

@@ -40,7 +40,7 @@
   <div class="feed-noticias">
     <div class="feed">
 
-      <div class="postagem-usuario" *ngFor='let produto of listaDeProdutos' >
+      <div class="postagem-usuario" *ngFor='let produto of listaDeProdutos | orderBy: key : reverse' >
 
         <div class="header">
           <div class="usuario-dados-postagem">

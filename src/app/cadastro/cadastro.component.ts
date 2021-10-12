@@ -1,3 +1,4 @@
+import { AlertasService } from './../service/alertas.service';
 import { AuthService } from './../service/auth.service';
 import { Usuario } from './../model/Usuario';
 import { Component, OnInit } from '@angular/core';
@@ -15,7 +16,8 @@ export class CadastroComponent implements OnInit {
 
   constructor(
     private authService: AuthService,
-    private router: Router
+    private router: Router,
+    private alertas: AlertasService
 
   ) { }
 
@@ -31,7 +33,7 @@ export class CadastroComponent implements OnInit {
 
   cadastrar() {
     if(this.cadastro.senha != this.confirmarSenha) {
-      alert('As senhas estao incorretas!');
+      this.alertas.showAlertDanger('As senhas estao incorretas!');
 
     }else {
       // IMC = Peso ÷ (Altura × Altura)
@@ -46,11 +48,11 @@ export class CadastroComponent implements OnInit {
 
         this.router.navigate(['/login']);
 
-        alert('Usuario cadastrodo com sucesso!');
+        this.alertas.showAlertSuccess('Usuario cadastrodo com sucesso!');
 
       }, erro => {
         if(erro.status == 500 || erro.status == 400) {
-          alert('Ocorreu um erro ao realizar o cadastrar!');
+          this.alertas.showAlertDanger('Ocorreu um erro ao realizar o cadastrar!');
 
         }
 

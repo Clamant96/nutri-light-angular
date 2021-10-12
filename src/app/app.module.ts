@@ -13,6 +13,10 @@ import { CategoriaComponent } from './categoria/categoria.component';
 import { ProdutoComponent } from './editar/produto/produto.component';
 import { PerfilComponent } from './perfil/perfil.component';
 import { UsuarioComponent } from './editar/usuario/usuario.component';
+import { AlertasComponent } from './alertas/alertas.component';
+
+import { ModalModule } from 'ngx-bootstrap/modal';
+import { OrderModule } from 'ngx-order-pipe';
 
 @NgModule({
   declarations: [
@@ -25,12 +29,15 @@ import { UsuarioComponent } from './editar/usuario/usuario.component';
     ProdutoComponent,
     PerfilComponent,
     UsuarioComponent,
+    AlertasComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    FormsModule
+    FormsModule,
+    ModalModule.forRoot(),
+    OrderModule
   ],
   providers: [],
   bootstrap: [AppComponent]

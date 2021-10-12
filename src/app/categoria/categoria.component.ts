@@ -1,3 +1,4 @@
+import { AlertasService } from './../service/alertas.service';
 import { CategoriaService } from './../service/categoria.service';
 import { Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
@@ -19,7 +20,8 @@ export class CategoriaComponent implements OnInit {
 
   constructor(
     private router: Router,
-    private categoriaService: CategoriaService
+    private categoriaService: CategoriaService,
+    private alertas: AlertasService
 
   ) { }
 
@@ -55,7 +57,7 @@ export class CategoriaComponent implements OnInit {
       /* PEGA ESSE Objeto(JSON) E INSERE DENTRO DO Objeto tema, INSERINDO ESSE DADOS NA BASE DE DADOS */
       this.categoria = resp;
       /* RETORNA UMA RESPOSTA AO USUARIO */
-      alert('Tema cadastrado com sucesso.');
+      this.alertas.showAlertSuccess('Tema cadastrado com sucesso.');
       /* SEMPRE QUE HOUVER UM NOVO DADO, ATUALIZE MINHA LISTA DE TEMAS */
       this.findAllCategorias();
       /* INSTANCIA UM NOVO Objeto Tema, PARA QUE POSSA SER ZERADO OS DADOS ANTERIORES E COMECAR UM NOVO CADASTRO */
@@ -95,11 +97,11 @@ export class CategoriaComponent implements OnInit {
       /* INSTANCIA UM NOVO Objeto Tema, PARA QUE POSSA SER ZERADO OS DADOS ANTERIORES E COMECAR UM NOVO CADASTRO */
       this.putCategoriaSistema = new Categoria();
 
-      alert('Categoria atualizada com sucesso!');
+      this.alertas.showAlertSuccess('Categoria atualizada com sucesso!');
 
     },erro => {
       if(erro.status == 500 || erro.status == 400) {
-        alert('Ocorreu um erro ao tentar atualizar a categoria!');
+        this.alertas.showAlertDanger('Ocorreu um erro ao tentar atualizar a categoria!');
 
       }
 
@@ -112,7 +114,7 @@ export class CategoriaComponent implements OnInit {
 
       this.findAllCategorias();
 
-      alert('Categoria excluida com sucesso!');
+      this.alertas.showAlertSuccess('Categoria excluida com sucesso!');
 
     });
   }
