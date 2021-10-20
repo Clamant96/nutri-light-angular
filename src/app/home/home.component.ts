@@ -569,6 +569,8 @@ export class HomeComponent implements OnInit {
         this.findByIdListaUsuario();
         this.findAllByProdutos();
 
+        this.produto = new Produto();
+
       }, erro => {
         if(erro.status == 500 || erro.status == 400) {
           this.alertas.showAlertDanger('Ocorreu um erro ao atualizar o produto!');
